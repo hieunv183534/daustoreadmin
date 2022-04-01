@@ -1,0 +1,17 @@
+.container{
+    width: 60%;
+    height: 100%;
+    margin-left: 50%;
+    transform: translate(-50%,0);
+}
+
+.grid{
+    width: 100% !important;
+    height: calc(100% - 56px) !important;
+    border: 0 !important;
+    float: left;
+}
+
+.content-content{
+    padding: 0px 16px !important;
+}

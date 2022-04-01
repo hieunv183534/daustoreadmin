@@ -1,0 +1,40 @@
+.info-header{
+    float: left;
+    width: 100%;
+    height: 40px;
+    background-color: aquamarine;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 10px;
+}
+
+.info-header a{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-decoration: none;
+}
+
+.info-header i{
+    margin-right: 6px;
+    font-size: 20px;
+}
+
+.info-body{
+    float: left;
+    background-color: bisque;
+    width: 100%;
+    height: calc(100% - 40px);
+    padding: 5px 10px;
+    overflow: auto;
+}
+/* unit info and checkin */
+
+.check-in .row{
+    padding: 0px 30px !important;
+}
+
+.check-in .item-title{
+    font-size: 14px;
+}

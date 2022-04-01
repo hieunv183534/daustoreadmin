@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../lib/fontawesome/css/all.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/layout/main-layout.css">
+    <link rel="stylesheet" href="../../css/layout/cilivian-epidemic-situation.css">
+</head>
+
+<body>
+    <div class="menu">
+        <div class="menu-header">
+            <i class="fas fa-shield-virus"></i>
+            <h5>ANTI COVID</h5>
+        </div>
+        <div class="menu-body">
+            <div id="cilivianHome" class="menu-item" toHref="medicalstaff-home" title="Trang chủ">
+                <i class="fas fa-home"></i>
+                <p>Trang chủ</p>
+            </div>
+            <div id="cilivianFeed" class="menu-item" toHref="medicalstaff-feed" title="Thông tin">
+                <i class="fas fa-newspaper"></i>
+                <p>Thông tin</p>
+            </div>
+            <div id="cilivianFeed" class="menu-item menu-item-active" toHref="medicalstaff-declaration-list" title="Danh sách khai báo y tế">
+                <i class="fas fa-list-alt"></i>
+                <p>Khai báo y tế</p>
+            </div>
+            <div id="cilivianSituation" class="menu-item" toHref="medicalstaff-epidemic-situation"
+                title="Tình hình dịch bệnh">
+                <i class="fas fa-globe-asia"></i>
+                <p>Tình hình dịch</p>
+            </div>
+        </div>
+        <div class="toggle-menu">
+            <i class="fas fa-angle-left"></i>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content-header">
+            <div class="content-header-left">
+                <i class="fas fa-user-nurse"></i>
+                <h2>|</h2><h2 id="unitDetail"></h2>
+            </div>
+            <div class="content-header-right">
+                <div class="notification">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <button class="user">
+                    <div class="avatar"></div>
+                    <p class="display-user"></p>
+                    <i class="fas fa-angle-down"></i>
+                </button>
+                <div class="list-option">
+                    <div class="item-option">Chỉnh sửa thông tin</div>
+                    <div class="item-option">Hotline</div>
+                    <div class="item-option">About me</div>
+                    <div class="item-option btn-logout">Đăng xuất</div>
+                </div>
+            </div>
+        </div>
+        <div class="content-body">
+            <div class="function-bar">
+                <span>
+                    <div class="dropdown" style="border:none;">
+                        <button class="dropdown-main">
+                            <p>Khai báo toàn dân</p>
+                            <div class="icon"><i class="fas fa-chevron-down"></i></div>
+                        </button>
+                        <div class="dropdown-data">
+                            <div class="dropdown-item item-selected" id="listdomesticquest"
+                                valuename="Khai báo toàn dân">
+                                <i class="fas fa-check"></i>
+                                <p>Khai báo toàn dân</p>
+                            </div>
+                            <div class="dropdown-item" id="listmovedeclaration" valuename="Khai báo di chuyển">
+                                <i class="fas fa-check"></i>
+                                <p>Khai báo di chuyển</p>
+                            </div>
+                            <div class="dropdown-item" id="listentrydeclaration" valuename="Khai báo nhập cảnh">
+                                <i class="fas fa-check"></i>
+                                <p>Khai báo nhập cảnh</p>
+                            </div>
+                        </div>
+                    </div>
+                </span>
+                <span>
+                    <input type="text" class="input search-box" placeholder="Tìm theo số điện thoại">
+                    <button class="button button-secondary button-icon" id="btnRefresh">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </span>
+            </div>
+            <div class="content-content">
+                <div class="grid">
+                    <table>
+
+                    </table>
+                </div>
+                <div class="paging-bar">
+                    <div class="paging-bar-left">
+                        <p id="pagingInfo">11</p>
+                    </div>
+                    <div class="paging-bar-right">
+                        <div class="dropdown last-dropdown" style="border:none;">
+                            <button class="dropdown-main">
+                                <p>100</p>
+                                <div class="icon"><i class="fas fa-chevron-down"></i></div>
+                            </button>
+                            <div class="dropdown-data">
+                                <div class="dropdown-item" valuename="200">
+                                    <i class="fas fa-check"></i>
+                                    <p>200</p>
+                                </div>
+                                <div class="dropdown-item item-selected" valuename="100">
+                                    <i class="fas fa-check"></i>
+                                    <p>100</p>
+                                </div>
+                                <div class="dropdown-item" valuename="50">
+                                    <i class="fas fa-check"></i>
+                                    <p>50</p>
+                                </div>
+                                <div class="dropdown-item" valuename="20">
+                                    <i class="fas fa-check"></i>
+                                    <p>20</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p>bản ghi/trang</p>
+
+                        <button class="pre-page">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="next-page">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <span id="thisIsListDeclaration" style="display: none;"></span>
+
+    <div class="data-list">
+    </div>
+
+    
+
+    <div class="toast-messenger" type="success" isShow="hide">
+        <i class="mes-icon fas fa-exclamation-circle"></i>
+        <i class="mes-icon fas fa-check-circle"></i>
+        <div class="mes-text">Thêm mới thành công</div>
+    </div>
+
+    <div class="loader" isShow="hide">
+        <div class="loader-modal"></div>
+        <div class="loader-icon"></div>
+    </div>
+
+    <script src="../../js/model/tableColums.js"></script>
+    <script src="../../js/common/common.js"></script>
+    <script src="../../api/BaseApi.js"></script>
+    <script src="../../api/DeclarationApi.js"></script>
+    <script src="../../js/page/base.js"></script>
+    <script src="../../js/page/medicalstaff/medicalstaffDeclarationList.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/layout/main-layout.css">
+    <link rel="stylesheet" href="./lib/fontawesome/css/all.css">
+    <link rel="stylesheet" href="./css/layout/login.css">
+</head>
+<style>
+    body {
+        display: flex;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+    }
+</style>
+
+<body>
+    <div class="menu-header">
+        <i class="fas fa-shield-virus"></i>
+        <h5>ANTI COVID</h5>
+    </div>
+    <div class="container">
+        <div class="title">Đăng ký tài khoản:</div>
+        <div>
+            <div class="user-details">
+                <div class="input-box">
+                    <span class="details">Số điện thoại</span>
+                    <input type="text" placeholder="Nhập số điện thoại" id="valuePhoneNumber" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Mật khẩu</span>
+                    <input type="password" placeholder="Nhập mật khẩu" id="valuePassword" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Nhập lại mật khẩu</span>
+                    <input type="password" placeholder="Nhập lại mật khẩu" id="valuePassword2" required>
+                </div>
+            </div>
+
+            <div class="role ">
+                <span class="item-title">Chức vụ:</span>
+                <br>
+                <div class="radio-button-group radio-button-group2" id="valueRole" datatype="number" value="0">
+                    <button class="radio-button" value="1" label="0">
+                        <div class="radio-button-check"></div>
+                        <div class="radio-button-focus"></div>
+                    </button>
+                    <p>Không</p>
+                    <button class="radio-button" value="0" label="1">
+                        <div class="radio-button-check"></div>
+                        <div class="radio-button-focus"></div>
+                    </button>
+                    <p>Nhân viên y tế</p>
+                    <button class="radio-button" value="0" label="2">
+                        <div class="radio-button-check"></div>
+                        <div class="radio-button-focus"></div>
+                    </button>
+                    <p>Quản lý</p>
+                </div>
+            </div>
+
+            <div class="unit">
+                <span class="item-title">Địa phương:</span>
+                <div class="row">
+                    <div class="form-item divide-1-row">
+                        <div class="radio-button-group radio-button-group2" id="checkUnit" datatype="string" value="ward">
+                            <button class="radio-button" value="0" id="checkProvince" label="province">
+                                <div class="radio-button-check"></div>
+                                <div class="radio-button-focus"></div>
+                            </button>
+                            <p>Tỉnh, thành phố:</p>
+                            <button class="radio-button" value="0" id="checkDistrict" label="district">
+                                <div class="radio-button-check"></div>
+                                <div class="radio-button-focus"></div>
+                            </button>
+                            <p>Quận, huyện:</p>
+                            <button class="radio-button" value="1" id="checkWard" label="ward">
+                                <div class="radio-button-check"></div>
+                                <div class="radio-button-focus"></div>
+                            </button>
+                            <p>Xã, phường:</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-item divide-3-row">
+                        <div id="valueProvince" type="Province" class="combobox" >
+                            <input type="text" class="input">
+                            <i class="fas fa-angle-down"></i>
+                        </div>
+                    </div>
+                    <div class="form-item divide-3-row">
+                        <div id="valueDistrict" type="District" class="combobox">
+                            <input type="text" class="input">
+                            <i class="fas fa-angle-down"></i>
+                        </div>
+                    </div>
+                    <div class="form-item divide-3-row">
+                        <div id="valueWard" type="Ward" class="combobox">
+                            <input type="text" class="input">
+                            <i class="fas fa-angle-down"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom">
+                <a href="index.html">Đăng nhập</a>
+                <button class="button button-primary" id="btnRegister">Đăng ký</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-messenger" type="success" isShow="hide">
+        <i class="mes-icon fas fa-exclamation-circle"></i>
+        <i class="mes-icon fas fa-check-circle"></i>
+        <div class="mes-text">Thêm mới thành công</div>
+    </div>
+
+    <div class="loader" isShow="hide">
+        <div class="loader-modal"></div>
+        <div class="loader-icon"></div>
+    </div>
+
+    <div class="data-list">
+    </div>
+
+    <script>
+    </script>
+    <script src="./js/common/common.js"></script>
+    <script src="./api/BaseApi.js"></script>
+    <script src="./api/UnitApi.js"></script>
+    <script src="./api/AuthApi.js"></script>
+    <script src="./js/register.js"></script>
+</body>
+
+</html>

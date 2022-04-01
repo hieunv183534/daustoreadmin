@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/layout/main-layout.css">
+    <link rel="stylesheet" href="./lib/fontawesome/css/all.css">
+    <link rel="stylesheet" href="./css/layout/login.css">
+</head>
+<style>
+body{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+</style>
+
+
+<body>
+    <div class="menu-header">
+        <i class="fas fa-shield-virus"></i>
+        <h5>ANTI COVID</h5>
+    </div>
+    <div class="container"> 
+        <div class="title">Đăng nhập</div>
+        <form>
+            <div class="user-details">
+                <div class="input-box">
+                    <span class="details">Số điện thoại</span>
+                    <input type="text" placeholder="Nhập số điện thoại" id="valuePhoneNumber" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Mật khẩu</span>
+                    <input type="password" placeholder="Nhập mật khẩu" id="valuePassword" required>
+                </div >
+            </div>
+
+            <div class="bottom">
+                <a href="register.html">Đăng ký tài khoản</a>
+                <input class="button" type="button" id="btnLogin" value="Đăng nhập">
+            </div>
+        </form>
+    </div>
+
+
+    <div class="toast-messenger" type="success" isShow="hide">
+        <i class="mes-icon fas fa-exclamation-circle"></i>
+        <i class="mes-icon fas fa-check-circle"></i>
+        <div class="mes-text">Thêm mới thành công</div>
+    </div>
+
+    <div class="loader" isShow="hide">
+        <div class="loader-modal"></div>
+        <div class="loader-icon"></div>
+    </div>
+
+    <script src="./js/common/common.js"></script>
+    <script src="./api/BaseApi.js"></script>
+    <script src="./api/AuthApi.js"></script>
+    <script src="./api/PersonApi.js"></script>
+    <script src="./api/AdminApi.js"></script>
+    <script src="./api/MedicalApi.js"></script>
+    <script src="./api/UnitApi.js"></script>
+    <script src="./js/login.js"></script>
+</body>
+</html>
+
+    
