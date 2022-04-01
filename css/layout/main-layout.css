@@ -13,7 +13,7 @@
     height: 50px;
     float: left;
     font-size: 30px;
-    color: #2CA01C;
+    color: #ff7ff7;
     display: flex;
     align-items: center;
     padding: 0px 10px;
@@ -315,4 +315,23 @@
 
 .paging-bar-right .dropdown{
     width: 100px !important ;
+}
+
+
+.container{
+    width: 98%;
+    height: 100%;
+    margin-left: 50%;
+    transform: translate(-50%,0);
+}
+
+.grid{
+    width: 100% !important;
+    height: calc(100% - 56px) !important;
+    border: 0 !important;
+    float: left;
+}
+
+.content-content{
+    padding: 0px 16px !important;
 }

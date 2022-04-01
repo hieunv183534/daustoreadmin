@@ -6,34 +6,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../../lib/fontawesome/css/all.css">
-    <link rel="stylesheet" href="../../css/main.css">
-    <link rel="stylesheet" href="../../css/layout/main-layout.css">
-    <link rel="stylesheet" href="../../css/layout/feed-layout.css">
+    <link rel="stylesheet" href="../lib/fontawesome/css/all.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/layout/main-layout.css">
 </head>
 
 <body>
     <div class="menu">
         <div class="menu-header">
-            <i class="fas fa-shield-virus"></i>
-            <h5>ANTI COVID</h5>
+            <img src="https://daustore.store/assets/image/logo.jpg" alt="" style="width: 30px;">
+            <h5>DÂU STORE</h5>
         </div>
         <div class="menu-body">
-            <div id="cilivianHome" class="menu-item" toHref="cilivian-home">
+            <div id="cilivianHome" class="menu-item menu-item-active" toHref="home" title="Trang chủ">
                 <i class="fas fa-home"></i>
                 <p>Trang chủ</p>
             </div>
-            <div id="cilivianFeed" class="menu-item menu-item-active" toHref="cilivian-feed">
-                <i class="fas fa-newspaper"></i>
-                <p>Thông tin</p>
+            <div id="cilivianFeed" class="menu-item" toHref="item" title="Quản lí các mặt hàng">
+                <i class="fa-solid fa-truck-ramp-box"></i>
+                <p>Quản lí hàng</p>
             </div>
-            <div id="cilivianDeclare" class="menu-item" toHref="cilivian-declaration">
-                <i class="fas fa-file-contract"></i>
-                <p>Tờ khai y tế</p>
+            <div id="cilivianDeclare" class="menu-item" toHref="order" title="Quản lí các đơn hàng">
+                <i class="fa-solid fa-truck-fast"></i>
+                <p>Quản lí đơn</p>
             </div>
-            <div id="cilivianSituation" class="menu-item" toHref="cilivian-epidemic-situation">
-                <i class="fas fa-globe-asia"></i>
-                <p>Tình hình dịch</p>
+            <div id="cilivianSituation" class="menu-item" toHref="gift"
+                title="Quản lí các mã khuyến mãi">
+                <i class="fa-solid fa-gift"></i>
+                <p>Mã khuyến mãi</p>
             </div>
         </div>
         <div class="toggle-menu">
@@ -43,7 +43,7 @@
     <div class="content">
         <div class="content-header">
             <div class="content-header-left">
-                <i class="fas fa-user"></i>
+                <i class="fas fa-user-cog"></i>
                 <h2>|</h2><h2 id="unitDetail"></h2>
             </div>
             <div class="content-header-right">
@@ -59,7 +59,6 @@
                     <div class="item-option">Chỉnh sửa thông tin</div>
                     <div class="item-option">Hotline</div>
                     <div class="item-option">About me</div>
-                    <div class="item-option btn-showqr">QR Code</div>
                     <div class="item-option btn-logout">Đăng xuất</div>
                 </div>
             </div>
@@ -67,37 +66,26 @@
         <div class="content-body">
             <div class="function-bar">
                 <span>
-                    <h4>Chọn thông báo từ:</h4>
                     <div class="dropdown" style="border:none;">
                         <button class="dropdown-main">
-                            <p>Tin từ người dân</p>
+                            <p>Tài khoản của quản lí</p>
                             <div class="icon"><i class="fas fa-chevron-down"></i></div>
                         </button>
                         <div class="dropdown-data">
-                            <div class="dropdown-item item-selected" id="cilivianPost" valuename="Tin từ người dân">
+                            <div class="dropdown-item item-selected" id="managerAccount"
+                                valuename="Tài khoản của quản lí">
                                 <i class="fas fa-check"></i>
-                                <p>Tin từ người dân</p>
+                                <p>Tài khoản của quản lí</p>
                             </div>
-                            <div class="dropdown-item" id="medicalStaffPost" valuename="Tin từ NVYT">
+                            <div class="dropdown-item" id="medicalStaffAccount" valuename="Tài khoản của NVYT">
                                 <i class="fas fa-check"></i>
-                                <p>Tin từ NVYT</p>
-                            </div>
-                            <div class="dropdown-item" id="managerPost" valuename="Tin từ quản lí">
-                                <i class="fas fa-check"></i>
-                                <p>Tin từ quản lí</p>
-                            </div>
-                            <div class="dropdown-item" id="seftPost" valuename="Tin của bản thân">
-                                <i class="fas fa-check"></i>
-                                <p>Tin của bản thân</p>
+                                <p>Tài khoản của NVYT</p>
                             </div>
                         </div>
                     </div>
                 </span>
                 <span>
-                    <button class="button button-primary" id="btnAddNewPost">
-                        <i class="fas fa-plus"></i>
-                        Đăng bài mới
-                    </button>
+                    <input type="text" class="input search-box" placeholder="Tìm theo số điện thoại">
                     <button class="button button-secondary button-icon" id="btnRefresh">
                         <i class="fas fa-sync-alt"></i>
                     </button>
@@ -105,8 +93,10 @@
             </div>
             <div class="content-content">
                 <div class="container">
-                    <div class="post-list"  mode="default">
+                    <div class="grid">
+                        <table>
 
+                        </table>
                     </div>
                     <div class="paging-bar">
                         <div class="paging-bar-left">
@@ -138,7 +128,7 @@
                                 </div>
                             </div>
                             <p>bản ghi/trang</p>
-    
+
                             <button class="pre-page">
                                 <i class="fas fa-chevron-left"></i>
                             </button>
@@ -152,38 +142,11 @@
         </div>
     </div>
 
+    <span id="thisIsApproveAccount" style="display: none;"></span>
 
-    <div class="dialog">
-        <div class="dialog-modal"></div>
-        <div class="form">
-            <div class="form-header">
-                <div class="form-title">
-                    <h2>Tạo bài viết</h2>
-                </div>
-                <div class="close-from"> <i class="fas fa-times"></i> </div>
-            </div>
-            <div class="form-body">
-                <div class="row">
-                    <div class="form-item divide-1-row">
-                        <div class="item-title">Tiêu đề bài viết:</div>
-                        <input type="text" class="input" id="valueTitle">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-item divide-1-row">
-                        <div class="item-title">Nội dung bài viết:</div>
-                        <div class="textarea-wrapper">
-                            <textarea id="valueContent"></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-footer">
-                <button class="button button-primary" id="btnPostPost">Đăng bài</button>
-            </div>
-        </div>
+    <div class="data-list">
     </div>
-    
+
     <div class="toast-messenger" type="success" isShow="hide">
         <i class="mes-icon fas fa-exclamation-circle"></i>
         <i class="mes-icon fas fa-check-circle"></i>
@@ -195,16 +158,10 @@
         <div class="loader-icon"></div>
     </div>
 
-    <div class="data-list">
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
-    <script src="../../js/common/common.js"></script>
-    <script src="../../js/common/utils.js"></script>
-    <script src="../../api/BaseApi.js"></script>
-    <script src="../../api/NotificationApi.js"></script>
-    <script src="../../js/page/base.js"></script>
-    <script src="../../js/page/cilivian/cilivianFeed.js"></script>
+    <script src="../js/model/tableColums.js"></script>
+    <script src="../js/common/common.js"></script>
+    <script src="../js/page/base.js"></script>
+    <script src="../js/page/manager/managerApproveAccount.js"></script>
 </body>
 
 </html>
