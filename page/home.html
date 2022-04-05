@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../lib/fontawesome/css/all.css">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/layout/main-layout.css">
+    <link rel="stylesheet" href="../css/layout/home-layout.css">
 </head>
 
 <body>
@@ -44,7 +45,7 @@
         <div class="content-header">
             <div class="content-header-left">
                 <i class="fas fa-user-cog"></i>
-                <h2>|</h2><h2 id="unitDetail"></h2>
+                <h2>|</h2><h4 id="livetime"></h4>
             </div>
             <div class="content-header-right">
                 <div class="notification">
@@ -66,83 +67,47 @@
         <div class="content-body">
             <div class="function-bar">
                 <span>
-                    <div class="dropdown" style="border:none;">
-                        <button class="dropdown-main">
-                            <p>Tài khoản của quản lí</p>
-                            <div class="icon"><i class="fas fa-chevron-down"></i></div>
-                        </button>
-                        <div class="dropdown-data">
-                            <div class="dropdown-item item-selected" id="managerAccount"
-                                valuename="Tài khoản của quản lí">
-                                <i class="fas fa-check"></i>
-                                <p>Tài khoản của quản lí</p>
-                            </div>
-                            <div class="dropdown-item" id="medicalStaffAccount" valuename="Tài khoản của NVYT">
-                                <i class="fas fa-check"></i>
-                                <p>Tài khoản của NVYT</p>
-                            </div>
-                        </div>
-                    </div>
                 </span>
                 <span>
-                    <input type="text" class="input search-box" placeholder="Tìm theo số điện thoại">
                     <button class="button button-secondary button-icon" id="btnRefresh">
                         <i class="fas fa-sync-alt"></i>
                     </button>
                 </span>
             </div>
             <div class="content-content">
-                <div class="container">
-                    <div class="grid">
-                        <table>
-
-                        </table>
-                    </div>
-                    <div class="paging-bar">
-                        <div class="paging-bar-left">
-                            <p id="pagingInfo">11</p>
-                        </div>
-                        <div class="paging-bar-right">
-                            <div class="dropdown last-dropdown" style="border:none;">
-                                <button class="dropdown-main">
-                                    <p>100</p>
-                                    <div class="icon"><i class="fas fa-chevron-down"></i></div>
-                                </button>
-                                <div class="dropdown-data">
-                                    <div class="dropdown-item" valuename="200">
-                                        <i class="fas fa-check"></i>
-                                        <p>200</p>
-                                    </div>
-                                    <div class="dropdown-item item-selected" valuename="100">
-                                        <i class="fas fa-check"></i>
-                                        <p>100</p>
-                                    </div>
-                                    <div class="dropdown-item" valuename="50">
-                                        <i class="fas fa-check"></i>
-                                        <p>50</p>
-                                    </div>
-                                    <div class="dropdown-item" valuename="20">
-                                        <i class="fas fa-check"></i>
-                                        <p>20</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <p>bản ghi/trang</p>
-
-                            <button class="pre-page">
-                                <i class="fas fa-chevron-left"></i>
-                            </button>
-                            <button class="next-page">
-                                <i class="fas fa-chevron-right"></i>
-                            </button>
-                        </div>
-                    </div>
+                <div class="home-row"><h2>THÔNG TIN THỐNG KÊ DÂU STORE</h2></div>
+                <div class="home-row">
+                    <p>Tổng số loại sản phẩm đang bán : 100</p>
+                </div>
+                <div class="home-row">
+                    <p>Giá cao nhất : 10000000đ</p>
+                </div>
+                <div class="home-row">
+                    <p>Giá thấp nhất : 10000đ</p>
+                </div>
+                <div class="home-row">
+                    <p>Số đơn trong ngày : 100 đơn</p>
+                </div>
+                <div class="home-row">
+                    <p>Số đơn trong tuần : 1000 đơn</p>
+                </div>
+                <div class="home-row">
+                    <p>Số đơn trong tháng : 10000 đơn</p>
+                </div>
+                <div class="home-row">
+                    <p>Doanh thu trong ngày : 1000000đ</p>
+                </div>
+                <div class="home-row">
+                    <p>Doanh thu trong tuần : 10000000đ</p>
+                </div>
+                <div class="home-row">
+                    <p>Doanh thu trong tháng : 100000000đ</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <span id="thisIsApproveAccount" style="display: none;"></span>
+    <span id="thisIsHomePage" style="display: none;"></span>
 
     <div class="data-list">
     </div>
@@ -161,7 +126,7 @@
     <script src="../js/model/tableColums.js"></script>
     <script src="../js/common/common.js"></script>
     <script src="../js/page/base.js"></script>
-    <script src="../js/page/manager/managerApproveAccount.js"></script>
+    <script src="../js/page/homePage.js"></script>
 </body>
 
 </html>

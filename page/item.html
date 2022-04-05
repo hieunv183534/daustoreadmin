@@ -44,7 +44,7 @@
         <div class="content-header">
             <div class="content-header-left">
                 <i class="fas fa-user-cog"></i>
-                <h2>|</h2><h2 id="unitDetail"></h2>
+                <h2>|</h2><h4 id="livetime"></h4>
             </div>
             <div class="content-header-right">
                 <div class="notification">
@@ -83,9 +83,9 @@
                             </div>
                         </div>
                     </div>
+                    <input type="text" class="input search-box" placeholder="Tìm theo số điện thoại">
                 </span>
                 <span>
-                    <input type="text" class="input search-box" placeholder="Tìm theo số điện thoại">
                     <button class="button button-secondary button-icon" id="btnRefresh">
                         <i class="fas fa-sync-alt"></i>
                     </button>
@@ -142,7 +142,7 @@
         </div>
     </div>
 
-    <span id="thisIsApproveAccount" style="display: none;"></span>
+    <span id="thisIsItemPage" style="display: none;"></span>
 
     <div class="data-list">
     </div>
@@ -159,11 +159,12 @@
     </div>
 
     <script src="../js/model/tableColums.js"></script>
+    <script src="../js/model/dataList.js"></script>
     <script src="../js/common/common.js"></script>
     <script src="../api/BaseApi.js"></script>
     <script src="../api/AccountApi.js"></script>
     <script src="../js/page/base.js"></script>
-    <script src="../js/page/manager/managerApproveAccount.js"></script>
+    <script src="../js/page/itemPage.js"></script>
 </body>
 
 </html>

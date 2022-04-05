@@ -1,20 +1,18 @@
-﻿unitApi = null;
-personApi = null;
-listUnitForCbb = null;
-authApi = null;
-notificationApi = null;
-accountApi = null;
-declarationApi = null;
-
-
-class Base {
+﻿class Base {
     constructor() {
         this.initEventBase();
-        this.index = 0;
-        this.count = 100;
-        this.total = null;
-        this.postMode = "add";
-        this.postId ="";
+        this.liveTime();
+    }
+
+    liveTime() {
+        var days = ['Chủ nhật ngày', 'Thứ 2 ngày', 'Thứ 3 ngày', 'Thứ 4 ngày', 'Thứ 5 ngày', 'Thứ 6 ngày', 'Thứ 7 ngày'];
+        let timeTag = document.querySelector('#livetime');
+        let now = new Date();
+        timeTag.innerHTML = `${days[now.getDay()]} ${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()} ${now.getHours()}h:${now.getMinutes()}p`;
+        setInterval(() => {
+            let now = new Date();
+            timeTag.innerHTML = `${days[now.getDay()]} ${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()} ${now.getHours()}h:${now.getMinutes()}p`;
+        }, 60000);
     }
 
     initEventBase() {
@@ -56,16 +54,16 @@ class Base {
             document.querySelectorAll('.paging-bar .dropdown-item').forEach(item => {
                 item.addEventListener('click', () => {
                     this.count = Number(item.getAttribute('valuename'));
-                    if(document.querySelector('#btnPostPost')){
+                    if (document.querySelector('#btnPostPost')) {
                         this.loadNotification(this.mode);
                     }
-                    if(document.querySelector('#thisIsApproveAccount')){
+                    if (document.querySelector('#thisIsApproveAccount')) {
                         this.loadListAccount(this.mode);
                     }
-                    if(document.querySelector('#thisIsListUnit')){
+                    if (document.querySelector('#thisIsListUnit')) {
                         this.loadListUnit(this.unitCode);
                     }
-                    if(document.querySelector('#thisIsListDeclaration')){
+                    if (document.querySelector('#thisIsListDeclaration')) {
                         this.loadListDeclaration(this.mode);
                     }
                 })
@@ -73,16 +71,16 @@ class Base {
 
             document.querySelector(".paging-bar .next-page").addEventListener('click', () => {
                 this.index = this.index + this.count;
-                if(document.querySelector('#btnPostPost')){
+                if (document.querySelector('#btnPostPost')) {
                     this.loadNotification(this.mode);
                 }
-                if(document.querySelector('#thisIsApproveAccount')){
+                if (document.querySelector('#thisIsApproveAccount')) {
                     this.loadListAccount(this.mode);
                 }
-                if(document.querySelector('#thisIsListUnit')){
+                if (document.querySelector('#thisIsListUnit')) {
                     this.loadListUnit(this.unitCode);
                 }
-                if(document.querySelector('#thisIsListDeclaration')){
+                if (document.querySelector('#thisIsListDeclaration')) {
                     this.loadListDeclaration(this.mode);
                 }
             });
@@ -92,16 +90,16 @@ class Base {
                     this.index = 0;
                 } else {
                     this.index = this.index - this.count;
-                    if(document.querySelector('#btnPostPost')){
+                    if (document.querySelector('#btnPostPost')) {
                         this.loadNotification(this.mode);
                     }
-                    if(document.querySelector('#thisIsApproveAccount')){
+                    if (document.querySelector('#thisIsApproveAccount')) {
                         this.loadListAccount(this.mode);
                     }
-                    if(document.querySelector('#thisIsListUnit')){
+                    if (document.querySelector('#thisIsListUnit')) {
                         this.loadListUnit(this.unitCode);
                     }
-                    if(document.querySelector('#thisIsListDeclaration')){
+                    if (document.querySelector('#thisIsListDeclaration')) {
                         this.loadListDeclaration(this.mode);
                     }
                 }
@@ -110,7 +108,7 @@ class Base {
 
         if (document.querySelector("#btnPostPost")) {
             document.querySelector("#btnPostPost").addEventListener('click', () => {
-                
+
                 if (this.postMode == "add") {
                     var newPost = {
                         title: document.querySelector('#valueTitle').value,
@@ -145,7 +143,7 @@ class Base {
 
     reloadPagingInfo() {
         document.querySelector('#pagingInfo').innerHTML =
-            `Hiển thị bản ghi từ ${this.index + 1} đến ${this.index+this.total}`;
+            `Hiển thị bản ghi từ ${this.index + 1} đến ${this.index + this.total}`;
     }
 
     menuItemOnClick(thisElement) {
@@ -171,254 +169,5 @@ class Base {
                 this.tableRowOnDBClick(item, tr);
             })
         });
-    }
-
-    loadUnit(unitCode, page, total, keyword, keyListUnit) {
-        unitApi.getById(unitCode, page, total, keyword).then(res => {
-            console.log(res.data);
-            localStorage.setItem(keyListUnit, JSON.stringify(res.data));
-        }).catch(error => {
-            console.log(error);
-        })
-    };
-
-    loadHeaderInfo(){
-        document.querySelector('h2#unitDetail').innerHTML = sessionStorage.getItem('unitDetail');
-        var userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
-        document.querySelector('p.display-user').innerHTML = userinfo.fullName;
-    }
-
-    loadUserInfo() {
-        document.querySelector('h2#unitDetail').innerHTML = sessionStorage.getItem('unitDetail');
-
-        var userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
-        console.log(userinfo);
-        if (userinfo.userId !== "000") {
-            document.querySelector('p.display-user').innerHTML = userinfo.fullName;
-
-            document.querySelector('#valueFullName').value = userinfo.fullName;
-            document.querySelector('#valueDateOfBirth').value = Util.formatDateToValue(userinfo.dateOfBirth);
-            document.querySelector('#valueAddress').value = userinfo.address;
-            document.querySelector('#valueNationality').value = userinfo.nationality;
-            setValueForRBG(document.querySelector('#valueSex'), userinfo.Sex);
-            setValueForRBG(document.querySelector('#valueDiseaseStatus'), userinfo.diseaseStatus);
-
-            this.loadUnitCbbs(userinfo.addressCode);
-
-
-        } else {
-            var popupBtns = [{ text: "", enable: false }, { text: "Đồng ý", enable: true }, { text: "", enable: false }]
-            var btns = showPopupDialog("Thông báo!", "Vui lòng đăng kí thông tin trước khi sử dụng!", popupBtns);
-            btns[1].addEventListener('click', () => {
-                hidePopupDialog();
-                document.querySelector("#valueFullName").focus();
-            })
-        }
-    }
-
-    loadUnitCbbs(wardCode) {
-        var codeArr = wardCode.split('|');
-        let a = codeArr[1];
-        let b = codeArr[2];
-        let c = codeArr[3];
-
-        var districtCode = `|${a}|${b}|`;
-        var provinceCode = `|${a}|`;
-
-        setValueCbb(document.querySelector('#valueProvince'), provinceCode);
-        setValueCbb(document.querySelector('#valueDistrict'), districtCode);
-        setValueCbb(document.querySelector('#valueWard'), wardCode);
-    }
-
-    setToParentUnit(){
-        var codeArr = this.unitCode.split('|');
-        let a = codeArr[1];
-        let b = codeArr[2];
-        let c = codeArr[3];
-        if(codeArr.length ==2){
-            this.unitCode = '|';
-        }else if(codeArr.length==3){
-            this.unitCode = `|`;
-        }else if(codeArr.length==4){
-            this.unitCode = `|${a}|`;
-        }else if(codeArr.length==5){
-            this.unitCode = `|${a}|${b}|`;
-        }
-    }
-
-    
-
-    initEventForPost() {
-        var btnDeletePosts = document.querySelectorAll('#btnDeletePost');
-        btnDeletePosts.forEach(btnDeletePost => {
-            btnDeletePost.addEventListener('click', () => {
-                var post = JSON.parse(btnDeletePost.parentElement.getAttribute('myPost'));
-                notificationApi.delete({ notificationId: post.notificationId }).then(res => {
-                    showToastMessenger('success', 'Xóa thành công thông báo!');
-                    btnDeletePost.parentElement.parentElement.remove();
-                }).catch(error => {
-                    console.log(error);
-                })
-            })
-        });
-
-        var btnUpdatePosts = document.querySelectorAll('#btnUpdatePost');
-        btnUpdatePosts.forEach(btnUpdatePost => {
-            btnUpdatePost.addEventListener('click', () => {
-                this.postMode = "update";
-                var post = JSON.parse(btnDeletePost.parentElement.getAttribute('myPost'));
-                this.postId = post.notificationId;
-                document.querySelector('#valueTitle').value = post.title;
-                document.querySelector('#valueContent').value = post.notificationContent;
-                document.querySelector('.dialog').classList.add('d-block');
-            })
-        })
-
-        var btnApprovePosts = document.querySelectorAll('#btnApprovePost');
-        btnApprovePosts.forEach(btnApprovePost => {
-            btnApprovePost.addEventListener('click', () => {
-                var post = JSON.parse(btnApprovePost.parentElement.getAttribute('myPost'));
-                notificationApi.browsingNotification({notificationId: post.notificationId, status: 1}).then(res=>{
-                    console.log(res);
-                    showToastMessenger('success', 'Duyệt thành công thông báo!');
-                    btnApprovePost.parentElement.parentElement.remove();
-                }).catch(error=>{
-                    console.log(error);
-                    showToastMessenger('success', 'Duyệt thất bại. Vui lòng thử lại sau!');
-                })
-            })
-        })
-
-        var btnRefusePosts = document.querySelectorAll('#btnRefusePost');
-        btnRefusePosts.forEach(btnRefusePost => {
-            btnRefusePost.addEventListener('click', () => {
-                var post = JSON.parse(btnRefusePost.parentElement.getAttribute('myPost'));
-                notificationApi.browsingNotification({notificationId: post.notificationId, status: 0}).then(res=>{
-                    console.log(res);
-                    showToastMessenger('success', 'Từ chối thành công thông báo!');
-                    btnRefusePost.parentElement.parentElement.remove();
-                }).catch(error=>{
-                    console.log(error);
-                    showToastMessenger('success', 'Từ chối thất bại. Vui lòng thử lại sau!');
-                })
-            })
-        })
-    }
-
-    loadNotification(mode) {
-        showLoader();
-        switch (mode) {
-            case 1:
-                notificationApi.viewDifficultNotification(this.index, this.count).then(res => {
-                    console.log(res.data);
-                    this.total = res.data.length;
-                    this.reloadPagingInfo();
-                    loadListPost(res.data);
-                }).catch(error => {
-                    console.log(error);
-                    hideLoader();
-                    if (error.status == 405) {
-                        if (this.index == 0) {
-                            loadListPost([]);
-                            showToastMessenger('success', "Không có bản ghi nào cả hiuhiu!");
-                        } else {
-                            showToastMessenger('danger', "Bạn đã đến trang cuối mất rồi!");
-                            this.index = this.index - this.count;
-                        }
-                    } else {
-                        showToastMessenger('danger', "Đã có lỗi, vui lòng thử lại sau!");
-                    }
-                })
-                break;
-            case 2:
-                notificationApi.viewMedicalNotification(this.index, this.count).then(res => {
-                    console.log(res.data);
-                    this.total = res.data.length;
-                    this.reloadPagingInfo();
-                    loadListPost(res.data);
-                }).catch(error => {
-                    console.log(error);
-                    hideLoader();
-                    if (error.status == 405) {
-                        if (this.index == 0) {
-                            loadListPost([]);
-                            showToastMessenger('success', "Không có bản ghi nào cả hiuhiu!");
-                        } else {
-                            showToastMessenger('danger', "Bạn đã đến trang cuối mất rồi!");
-                            this.index = this.index - this.count;
-                        }
-                    } else {
-                        showToastMessenger('danger', "Đã có lỗi, vui lòng thử lại sau!");
-                    }
-                })
-                break;
-            case 3:
-                notificationApi.viewAdminNotification(this.index, this.count).then(res => {
-                    console.log(res.data);
-                    this.total = res.data.length;
-                    this.reloadPagingInfo();
-                    loadListPost(res.data);
-                }).catch(error => {
-                    console.log(error);
-                    hideLoader();
-                    if (error.status == 405) {
-                        if (this.index == 0) {
-                            loadListPost([]);
-                            showToastMessenger('success', "Không có bản ghi nào cả hiuhiu!");
-                        } else {
-                            showToastMessenger('danger', "Bạn đã đến trang cuối mất rồi!");
-                            this.index = this.index - this.count;
-                        }
-                    } else {
-                        showToastMessenger('danger', "Đã có lỗi, vui lòng thử lại sau!");
-                    }
-                })
-                break;
-            case 4:
-                notificationApi.get(this.index, this.count).then(res => {
-                    console.log(res.data);
-                    this.total = res.data.length;
-                    this.reloadPagingInfo();
-                    loadListPost(res.data);
-                    this.initEventForPost();
-                }).catch(error => {
-                    console.log(error);
-                    hideLoader();
-                    if (error.status == 405) {
-                        if (this.index == 0) {
-                            loadListPost([]);
-                            showToastMessenger('success', "Không có bản ghi nào cả hiuhiu!");
-                        } else {
-                            showToastMessenger('danger', "Bạn đã đến trang cuối mất rồi!");
-                            this.index = this.index - this.count;
-                        }
-                    } else {
-                        showToastMessenger('danger', "Đã có lỗi, vui lòng thử lại sau!");
-                    }
-                })
-                break;
-            case 5:
-                notificationApi.getListNotification(this.index, this.count).then(res => {
-                    console.log(res.data);
-                    this.total = res.data.length;
-                    this.reloadPagingInfo();
-                    loadListPost(res.data);
-                    this.initEventForPost();
-                }).catch(error => {
-                    console.log(error);
-                    hideLoader();
-                    if (error.status == 405) {
-                        if (this.index == 0) {
-                            loadListPost([]);
-                            showToastMessenger('success', "Không có bản ghi nào cả hiuhiu!");
-                        } else {
-                            showToastMessenger('danger', "Bạn đã đến trang cuối mất rồi!");
-                            this.index = this.index - this.count;
-                        }
-                    } else {
-                        showToastMessenger('danger', "Đã có lỗi, vui lòng thử lại sau!");
-                    }
-                });
-        }
     }
 }
