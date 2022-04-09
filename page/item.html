@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../lib/fontawesome/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
+        integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/layout/main-layout.css">
 </head>
@@ -30,8 +33,7 @@
                 <i class="fa-solid fa-truck-fast"></i>
                 <p>Quản lí đơn</p>
             </div>
-            <div id="cilivianSituation" class="menu-item" toHref="gift"
-                title="Quản lí các mã khuyến mãi">
+            <div id="cilivianSituation" class="menu-item" toHref="gift" title="Quản lí các mã khuyến mãi">
                 <i class="fa-solid fa-gift"></i>
                 <p>Mã khuyến mãi</p>
             </div>
@@ -44,7 +46,8 @@
         <div class="content-header">
             <div class="content-header-left">
                 <i class="fas fa-user-cog"></i>
-                <h2>|</h2><h4 id="livetime"></h4>
+                <h2>|</h2>
+                <h4 id="livetime"></h4>
             </div>
             <div class="content-header-right">
                 <div class="notification">
@@ -68,24 +71,27 @@
                 <span>
                     <div class="dropdown" style="border:none;">
                         <button class="dropdown-main">
-                            <p>Tài khoản của quản lí</p>
+                            <p>Tất cả loại hàng hóa</p>
                             <div class="icon"><i class="fas fa-chevron-down"></i></div>
                         </button>
                         <div class="dropdown-data">
                             <div class="dropdown-item item-selected" id="managerAccount"
-                                valuename="Tài khoản của quản lí">
+                                valuename="Tất cả loại hàng hóa">
                                 <i class="fas fa-check"></i>
-                                <p>Tài khoản của quản lí</p>
-                            </div>
-                            <div class="dropdown-item" id="medicalStaffAccount" valuename="Tài khoản của NVYT">
-                                <i class="fas fa-check"></i>
-                                <p>Tài khoản của NVYT</p>
+                                <p>Quần áo</p>
                             </div>
                         </div>
                     </div>
-                    <input type="text" class="input search-box" placeholder="Tìm theo số điện thoại">
+                    <input type="text" class="input search-box" placeholder="Tìm theo tên, mã hàng">
                 </span>
                 <span>
+                    <button class="button button-secondary">
+                        Quản lí danh mục hàng
+                    </button>
+                    <button class="button button-primary">
+                        <i class="fas fa-plus"></i>
+                        Thêm mặt hàng mới
+                    </button>
                     <button class="button button-secondary button-icon" id="btnRefresh">
                         <i class="fas fa-sync-alt"></i>
                     </button>
@@ -138,6 +144,265 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-data">
+        <div class="form">
+            <div class="form-header">
+                <div class="form-title">
+                    <h2>Thông tin sản phẩm</h2>
+                </div>
+                <div class="close-from"> <i class="fas fa-times"></i> </div>
+            </div>
+            <div class="form-body">
+                <div class="row">
+                    <div class="form-item divide-2-3-row">
+                        <div class="item-title">Tên sản phẩm:</div>
+                        <input type="text" class="input">
+                    </div>
+                    <div class="form-item divide-3-row">
+                        <div class="item-title">Mã sản phẩm:</div>
+                        <input type="text" class="input" disabled>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-item divide-3-row">
+                        <div class="item-title">Giá gốc:</div>
+                        <input type="number" class="input">
+                    </div>
+                    <div class="form-item divide-3-row">
+                        <div class="item-title">Phần trăm khuyến mãi: </div>
+                        <input type="number" class="input">
+                    </div>
+                    <div class="form-item divide-3-row">
+                        <div class="item-title">Giá khuyến mãi:</div>
+                        <input type="number" class="input">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-item divide-1-row">
+                        <div class="item-title">Chi tiết sản phẩm: </div>
+                        <div class="textarea-wrapper">
+                            <textarea id="valueAddress"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-item divide-1-row">
+                        <div class="item-title">Danh sách media:<span style="font-size: 10px; font-weight: normal;">(Mặc
+                                định media đầu danh sách là avatar)</span> </div>
+                        <div class="list-media">
+                            <img src="https://firebasestorage.googleapis.com/v0/b/daustore.appspot.com/o/ratio-pref-1-1.png?alt=media"
+                                alt="">
+                            <img src="https://firebasestorage.googleapis.com/v0/b/daustore.appspot.com/o/ratio-pref-1-1.png?alt=media"
+                                alt="">
+                            <img src="https://firebasestorage.googleapis.com/v0/b/daustore.appspot.com/o/ratio-pref-1-1.png?alt=media"
+                                alt="">
+                            <img src="https://firebasestorage.googleapis.com/v0/b/daustore.appspot.com/o/ratio-pref-1-1.png?alt=media"
+                                alt="">
+                            <img src="https://firebasestorage.googleapis.com/v0/b/daustore.appspot.com/o/ratio-pref-1-1.png?alt=media"
+                                alt="">
+                            <img src="https://firebasestorage.googleapis.com/v0/b/daustore.appspot.com/o/ratio-pref-1-1.png?alt=media"
+                                alt="">
+                            <img src="https://firebasestorage.googleapis.com/v0/b/daustore.appspot.com/o/ratio-pref-1-1.png?alt=media"
+                                alt="">
+                            <img src="https://firebasestorage.googleapis.com/v0/b/daustore.appspot.com/o/ratio-pref-1-1.png?alt=media"
+                                alt="">
+                            <img src="https://firebasestorage.googleapis.com/v0/b/daustore.appspot.com/o/ratio-pref-1-1.png?alt=media"
+                                alt="">
+                            <img src="https://firebasestorage.googleapis.com/v0/b/daustore.appspot.com/o/ratio-pref-1-1.png?alt=media"
+                                alt="">
+                            <img src="https://firebasestorage.googleapis.com/v0/b/daustore.appspot.com/o/ratio-pref-1-1.png?alt=media"
+                                alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-item divide-2-3-row">
+                        <div class="item-title">Thêm media mới:<span style="font-size: 10px; font-weight: normal;">(Mặc
+                                định các media mới thêm sẽ ở cuối)</span> </div>
+                        <input type="file" multiple>
+                    </div>
+                    <div class="form-item divide-3-row">
+                        <button class="button button-secondary">Upload</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-footer">
+                <button class="button button-primary" id="btnUpdateUserInfo">Cập nhật thông tin</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-category">
+        <div class="form">
+            <div class="form-header">
+                <div class="form-title">
+                    <h2>Loại sản phẩm</h2>
+                </div>
+                <div class="close-from"> <i class="fas fa-times"></i> </div>
+            </div>
+            <div class="form-body">
+                <div class="row">
+                    <div class="form-item divide-1-row">
+                        <nav class="tree-nav">
+                            <div class="tree-nav__item-title">
+                                <p>Tất cả sản phẩm</p>
+                                <div class="tool">
+                                    <div class="tool-option"><i class="fa-solid fa-plus"></i></div>
+                                    <div class="tool-option"><i class="fa-solid fa-pen-clip"></i></div>
+                                    <div class="tool-option"><i class="fa-solid fa-minus"></i></div>
+                                </div>
+                            </div>
+                            <details class="tree-nav__item is-expandable">
+                                <summary class="tree-nav__item-title">Quần áo</summary>
+                                <div class="tree-nav__item">
+                                    <div class="tree-nav__item-title">
+                                        <p>Tất cả</p>
+                                        <div class="tool">
+                                            <div class="tool-option"><i class="fa-solid fa-plus"></i></div>
+                                            <div class="tool-option"><i class="fa-solid fa-pen-clip"></i></div>
+                                            <div class="tool-option"><i class="fa-solid fa-minus"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="tree-nav__item-title">
+                                        <p>Áo</p>
+                                        <div class="tool">
+                                            <div class="tool-option"><i class="fa-solid fa-plus"></i></div>
+                                            <div class="tool-option"><i class="fa-solid fa-pen-clip"></i></div>
+                                            <div class="tool-option"><i class="fa-solid fa-minus"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="tree-nav__item-title">
+                                        <p>Mũ</p>
+                                        <div class="tool">
+                                            <div class="tool-option"><i class="fa-solid fa-plus"></i></div>
+                                            <div class="tool-option"><i class="fa-solid fa-pen-clip"></i></div>
+                                            <div class="tool-option"><i class="fa-solid fa-minus"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="tree-nav__item-title">
+                                        <p>Giày</p>
+                                        <div class="tool">
+                                            <div class="tool-option"><i class="fa-solid fa-plus"></i></div>
+                                            <div class="tool-option"><i class="fa-solid fa-pen-clip"></i></div>
+                                            <div class="tool-option"><i class="fa-solid fa-minus"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <details class="tree-nav__item is-expandable">
+                                    <summary class="tree-nav__item-title">Quần</summary>
+                                    <div class="tree-nav__item">
+                                        <div class="tree-nav__item-title">
+                                            <p>Tất cả</p>
+                                            <div class="tool">
+                                                <div class="tool-option"><i class="fa-solid fa-plus"></i></div>
+                                                <div class="tool-option"><i class="fa-solid fa-pen-clip"></i></div>
+                                                <div class="tool-option"><i class="fa-solid fa-minus"></i></div>
+                                            </div>
+                                        </div>
+                                        <div class="tree-nav__item-title">
+                                            <p>Quần jean</p>
+                                            <div class="tool">
+                                                <div class="tool-option"><i class="fa-solid fa-plus"></i></div>
+                                                <div class="tool-option"><i class="fa-solid fa-pen-clip"></i></div>
+                                                <div class="tool-option"><i class="fa-solid fa-minus"></i></div>
+                                            </div>
+                                        </div>
+                                        <div class="tree-nav__item-title">
+                                            <p>Quần đùi</p>
+                                            <div class="tool">
+                                                <div class="tool-option"><i class="fa-solid fa-plus"></i></div>
+                                                <div class="tool-option"><i class="fa-solid fa-pen-clip"></i></div>
+                                                <div class="tool-option"><i class="fa-solid fa-minus"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </details>
+                            </details>
+                            <details class="tree-nav__item is-expandable">
+                                <summary class="tree-nav__item-title">Phụ kiện</summary>
+                                <div class="tree-nav__item">
+                                    <div class="tree-nav__item-title">
+                                        <p>Tất cả</p>
+                                        <div class="tool">
+                                            <div class="tool-option"><i class="fa-solid fa-plus"></i></div>
+                                            <div class="tool-option"><i class="fa-solid fa-pen-clip"></i></div>
+                                            <div class="tool-option"><i class="fa-solid fa-minus"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="tree-nav__item-title">
+                                        <p>Bông tai</p>
+                                        <div class="tool">
+                                            <div class="tool-option"><i class="fa-solid fa-plus"></i></div>
+                                            <div class="tool-option"><i class="fa-solid fa-pen-clip"></i></div>
+                                            <div class="tool-option"><i class="fa-solid fa-minus"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="tree-nav__item-title">
+                                        <p>Nhẫn</p>
+                                        <div class="tool">
+                                            <div class="tool-option"><i class="fa-solid fa-plus"></i></div>
+                                            <div class="tool-option"><i class="fa-solid fa-pen-clip"></i></div>
+                                            <div class="tool-option"><i class="fa-solid fa-minus"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="tree-nav__item-title">
+                                        <p>Dây chuyền</p>
+                                        <div class="tool">
+                                            <div class="tool-option"><i class="fa-solid fa-plus"></i></div>
+                                            <div class="tool-option"><i class="fa-solid fa-pen-clip"></i></div>
+                                            <div class="tool-option"><i class="fa-solid fa-minus"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </details>
+                            <details class="tree-nav__item is-expandable">
+                                <summary class="tree-nav__item-title">Đồ ăn</summary>
+                                <div class="tree-nav__item">
+                                    <div class="tree-nav__item-title">
+                                        <p>Tất cả</p>
+                                        <div class="tool">
+                                            <div class="tool-option"><i class="fa-solid fa-plus"></i></div>
+                                            <div class="tool-option"><i class="fa-solid fa-pen-clip"></i></div>
+                                            <div class="tool-option"><i class="fa-solid fa-minus"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="tree-nav__item-title">
+                                        <p>Nhung hươu</p>
+                                        <div class="tool">
+                                            <div class="tool-option"><i class="fa-solid fa-plus"></i></div>
+                                            <div class="tool-option"><i class="fa-solid fa-pen-clip"></i></div>
+                                            <div class="tool-option"><i class="fa-solid fa-minus"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="tree-nav__item-title">
+                                        <p>Yến sào</p>
+                                        <div class="tool">
+                                            <div class="tool-option"><i class="fa-solid fa-plus"></i></div>
+                                            <div class="tool-option"><i class="fa-solid fa-pen-clip"></i></div>
+                                            <div class="tool-option"><i class="fa-solid fa-minus"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="tree-nav__item-title">
+                                        <p>Đông trùng</p>
+                                        <div class="tool">
+                                            <div class="tool-option"><i class="fa-solid fa-plus"></i></div>
+                                            <div class="tool-option"><i class="fa-solid fa-pen-clip"></i></div>
+                                            <div class="tool-option"><i class="fa-solid fa-minus"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </details>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="form-footer">
+                <input type="text" class="input" style="margin-right: 40px;">
+                <button class="button button-primary" id="btnUpdateUserInfo">Thay đổi</button>
             </div>
         </div>
     </div>

@@ -13,6 +13,7 @@
 @import url('base/checkbox.css');
 @import url('base/popup.css');
 @import url('base/qr.css');
+@import url('base/treelist.css');
 @font-face {
     font-family: 'NotosansBold';
     src: url('../assets/font/notosans-bold.3ede5aff.woff2') format('woff2');

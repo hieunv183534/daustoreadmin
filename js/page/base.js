@@ -52,93 +52,21 @@
 
         if (document.querySelector('.paging-bar')) {
             document.querySelectorAll('.paging-bar .dropdown-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    this.count = Number(item.getAttribute('valuename'));
-                    if (document.querySelector('#btnPostPost')) {
-                        this.loadNotification(this.mode);
-                    }
-                    if (document.querySelector('#thisIsApproveAccount')) {
-                        this.loadListAccount(this.mode);
-                    }
-                    if (document.querySelector('#thisIsListUnit')) {
-                        this.loadListUnit(this.unitCode);
-                    }
-                    if (document.querySelector('#thisIsListDeclaration')) {
-                        this.loadListDeclaration(this.mode);
-                    }
-                })
+               console.log("Chọn số bản ghi");
             });
 
             document.querySelector(".paging-bar .next-page").addEventListener('click', () => {
-                this.index = this.index + this.count;
-                if (document.querySelector('#btnPostPost')) {
-                    this.loadNotification(this.mode);
-                }
-                if (document.querySelector('#thisIsApproveAccount')) {
-                    this.loadListAccount(this.mode);
-                }
-                if (document.querySelector('#thisIsListUnit')) {
-                    this.loadListUnit(this.unitCode);
-                }
-                if (document.querySelector('#thisIsListDeclaration')) {
-                    this.loadListDeclaration(this.mode);
-                }
+                console.log("Trang tiếp");
             });
 
             document.querySelector(".paging-bar .pre-page").addEventListener('click', () => {
                 if ((this.index - this.count) < 0) {
                     this.index = 0;
                 } else {
-                    this.index = this.index - this.count;
-                    if (document.querySelector('#btnPostPost')) {
-                        this.loadNotification(this.mode);
-                    }
-                    if (document.querySelector('#thisIsApproveAccount')) {
-                        this.loadListAccount(this.mode);
-                    }
-                    if (document.querySelector('#thisIsListUnit')) {
-                        this.loadListUnit(this.unitCode);
-                    }
-                    if (document.querySelector('#thisIsListDeclaration')) {
-                        this.loadListDeclaration(this.mode);
-                    }
+                    console.log("Trang trước");
                 }
             });
         };
-
-        if (document.querySelector("#btnPostPost")) {
-            document.querySelector("#btnPostPost").addEventListener('click', () => {
-
-                if (this.postMode == "add") {
-                    var newPost = {
-                        title: document.querySelector('#valueTitle').value,
-                        notificationContent: document.querySelector('#valueContent').value
-                    }
-                    notificationApi.add(newPost).then(res => {
-                        console.log(res);
-                        this.loadNotification(this.mode);
-                        document.querySelector('.dialog').classList.remove('d-block');
-                        showToastMessenger('success', 'Thêm thành công 1 thông báo mới!');
-                    }).catch(error => {
-                        console.log(error);
-                    });
-                } else {
-                    var newPost = {
-                        title: document.querySelector('#valueTitle').value,
-                        notificationContent: document.querySelector('#valueContent').value,
-                        notificationId: this.postId
-                    }
-                    notificationApi.update(newPost).then(res => {
-                        console.log(res);
-                        this.loadNotification(this.mode);
-                        document.querySelector('.dialog').classList.remove('d-block');
-                        showToastMessenger('success', 'Thông báo đã được cập nhật thành công!');
-                    }).catch(error => {
-                        console.log(error);
-                    });
-                }
-            })
-        }
     }
 
     reloadPagingInfo() {
