@@ -66,26 +66,74 @@
         <div class="content-body">
             <div class="function-bar">
                 <span>
-                    <div class="dropdown" style="border:none;">
+                    <div class="dropdown" style="border:none; width: 160px;">
                         <button class="dropdown-main">
-                            <p>Tài khoản của quản lí</p>
+                            <p>Tất cả trạng thái</p>
                             <div class="icon"><i class="fas fa-chevron-down"></i></div>
                         </button>
                         <div class="dropdown-data">
-                            <div class="dropdown-item item-selected" id="managerAccount"
-                                valuename="Tài khoản của quản lí">
+                            <div class="dropdown-item item-selected"
+                                valuename="Tất cả trạng thái">
                                 <i class="fas fa-check"></i>
-                                <p>Tài khoản của quản lí</p>
+                                <p>Tất cả trạng thái</p>
                             </div>
-                            <div class="dropdown-item" id="medicalStaffAccount" valuename="Tài khoản của NVYT">
+                            <div class="dropdown-item"
+                                valuename="Chờ duyệt">
                                 <i class="fas fa-check"></i>
-                                <p>Tài khoản của NVYT</p>
+                                <p>Chờ duyệt</p>
+                            </div>
+                            <div class="dropdown-item"
+                                valuename="Đã xác nhận">
+                                <i class="fas fa-check"></i>
+                                <p>Đã xác nhận</p>
+                            </div>
+                            <div class="dropdown-item"
+                                valuename="Đang giao">
+                                <i class="fas fa-check"></i>
+                                <p>Đang giao</p>
+                            </div>
+                            <div class="dropdown-item"
+                                valuename="Đã giao">
+                                <i class="fas fa-check"></i>
+                                <p>Đã giao</p>
+                            </div>
+                            <div class="dropdown-item"
+                                valuename="Đã hủy">
+                                <i class="fas fa-check"></i>
+                                <p>Đã hủy</p>
+                            </div>
+                            <div class="dropdown-item"
+                                valuename="Hoàn trả">
+                                <i class="fas fa-check"></i>
+                                <p>Hoàn trả</p>
                             </div>
                         </div>
                     </div>
+                    <h4>Từ:</h4>
+                    <input type="datetime-local" class="input" style="width:190px">
+                    <h4>Đến:</h4>
+                    <input type="datetime-local" class="input" style="width:190px">
                 </span>
                 <span>
-                    <input type="text" class="input search-box" placeholder="Tìm theo số điện thoại">
+                    <div class="dropdown" style="border:none; width: 150px;">
+                        <button class="dropdown-main">
+                            <p>Mới đến cũ</p>
+                            <div class="icon"><i class="fas fa-chevron-down"></i></div>
+                        </button>
+                        <div class="dropdown-data">
+                            <div class="dropdown-item item-selected"
+                                valuename="Mới đến cũ">
+                                <i class="fas fa-check"></i>
+                                <p>Mới đến cũ</p>
+                            </div>
+                            <div class="dropdown-item"
+                                valuename="Cũ đến mới">
+                                <i class="fas fa-check"></i>
+                                <p>Cũ đến mới</p>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="text" class="input search-box" placeholder="Tìm theo mã đơn, số điện thoại">
                     <button class="button button-secondary button-icon" id="btnRefresh">
                         <i class="fas fa-sync-alt"></i>
                     </button>
@@ -159,6 +207,7 @@
     </div>
 
     <script src="../js/model/tableColums.js"></script>
+    <script src="../js/model/dataList.js"></script>
     <script src="../js/common/common.js"></script>
     <script src="../js/page/base.js"></script>
     <script src="../js/page/orderPage.js"></script>

@@ -134,23 +134,40 @@ function loadTable(columns, datas, startIndex) {
         tr.append(parseHTML(`<td style="text-align: right;"><p>${index++}</p></td>`));
         columns.forEach(col => {
             let value;
-            if (col.field1 == undefined) {
-                value = item[`${col.field}`];
-            } else {
-                // value = ;
-                if (col.format == 'boolean') {
-                    value = item[`${col.field}`][`${col.field1}`] ?
-                        `<i class="fas fa-check-square" style="color:#2CA029;"></i>` :
-                        `<i class="fas fa-times-circle" style="color:#EC5504;"></i>`
-                } else if (col.format == 'date') {
-                    value = formatDate(item[`${col.field}`][`${col.field1}`]);
-                }
-                else {
-                    value = item[`${col.field}`][`${col.field1}`];
-                }
+            if (col.format == 'boolean') {
+                value = item[`${col.field}`] ?
+                    `<i class="fas fa-check-square" style="color:#2CA029;"></i>` :
+                    `<i class="fas fa-times-circle" style="color:#EC5504;"></i>`
+            } else if (col.format == 'date') {
+                value = formatDate(item[`${col.field}`]);
+            } else if (col.format == "listitem") {
+                let listItem = item[`${col.field}`];
+                value = parseHTML('<div class="list-item-order"></div>');
+                listItem.forEach(i => {
+                    value.append(parseHTML(`<div class="item-order">
+                                                <img src="${i.imgUrl}" alt="" style="width: 80px;">
+                                                <span> <b>X${i.quantity}</b> ${i.name}</span>
+                                            </div>`));
+                })
+            } else if (col.format == "orderer") {
+                let orderer = item[`${col.field}`];
+                value = `<b>${orderer.name}</b>,<br>${orderer.phone},<br>${orderer.address}`;
             }
-            var td = parseHTML(`<td style="${col.style}"><p>${value}</p></td>`);
-            tr.append(td);
+            else {
+                value = item[`${col.field}`];
+            }
+            if (col.format == "listitem") {
+                var td = parseHTML(`<td style="${col.style}"></td>`);
+                td.append(value);
+                tr.append(td);
+            } else if (col.format == "orderer") {
+                var td = parseHTML(`<td style="${col.style}">${value}</td>`);
+                tr.append(td);
+            }
+            else {
+                var td = parseHTML(`<td style="${col.style}"><p>${value}</p></td>`);
+                tr.append(td);
+            }
         });
         tbody.append(tr);
     });

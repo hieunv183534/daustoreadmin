@@ -69,24 +69,86 @@
         <div class="content-body">
             <div class="function-bar">
                 <span>
-                    <div class="dropdown" style="border:none;">
-                        <button class="dropdown-main">
-                            <p>Tất cả loại hàng hóa</p>
-                            <div class="icon"><i class="fas fa-chevron-down"></i></div>
-                        </button>
-                        <div class="dropdown-data">
-                            <div class="dropdown-item item-selected" id="managerAccount"
-                                valuename="Tất cả loại hàng hóa">
-                                <i class="fas fa-check"></i>
-                                <p>Quần áo</p>
-                            </div>
+                    <div class="category-bar">
+                        <div class="category-main">Tất cả sản phẩm</div>
+                        <div class="category-content">
+                            <nav class="tree-nav">
+                                <div class="tree-nav__item-title">
+                                    <p>Tất cả sản phẩm</p>
+                                </div>
+                                <details class="tree-nav__item is-expandable">
+                                    <summary class="tree-nav__item-title">Quần áo</summary>
+                                    <div class="tree-nav__item">
+                                        <div class="tree-nav__item-title">
+                                            <p>Tất cả</p>
+                                        </div>
+                                        <div class="tree-nav__item-title">
+                                            <p>Áo</p>
+                                        </div>
+                                        <div class="tree-nav__item-title">
+                                            <p>Mũ</p>
+                                        </div>
+                                        <div class="tree-nav__item-title">
+                                            <p>Giày</p>
+                                        </div>
+                                    </div>
+                                    <details class="tree-nav__item is-expandable">
+                                        <summary class="tree-nav__item-title">Quần</summary>
+                                        <div class="tree-nav__item">
+                                            <div class="tree-nav__item-title">
+                                                <p>Tất cả</p>
+                                            </div>
+                                            <div class="tree-nav__item-title">
+                                                <p>Quần jean</p>
+                                            </div>
+                                            <div class="tree-nav__item-title">
+                                                <p>Quần đùi</p>
+                                            </div>
+                                        </div>
+                                    </details>
+                                </details>
+                                <details class="tree-nav__item is-expandable">
+                                    <summary class="tree-nav__item-title">Phụ kiện</summary>
+                                    <div class="tree-nav__item">
+                                        <div class="tree-nav__item-title">
+                                            <p>Tất cả</p>
+                                        </div>
+                                        <div class="tree-nav__item-title">
+                                            <p>Bông tai</p>
+                                        </div>
+                                        <div class="tree-nav__item-title">
+                                            <p>Nhẫn</p>
+                                        </div>
+                                        <div class="tree-nav__item-title">
+                                            <p>Dây chuyền</p>
+                                        </div>
+                                    </div>
+                                </details>
+                                <details class="tree-nav__item is-expandable">
+                                    <summary class="tree-nav__item-title">Đồ ăn</summary>
+                                    <div class="tree-nav__item">
+                                        <div class="tree-nav__item-title">
+                                            <p>Tất cả</p>
+                                        </div>
+                                        <div class="tree-nav__item-title">
+                                            <p>Nhung hươu</p>
+                                        </div>
+                                        <div class="tree-nav__item-title">
+                                            <p>Yến sào</p>
+                                        </div>
+                                        <div class="tree-nav__item-title">
+                                            <p>Đông trùng</p>
+                                        </div>
+                                    </div>
+                                </details>
+                            </nav>
                         </div>
                     </div>
                     <input type="text" class="input search-box" placeholder="Tìm theo tên, mã hàng">
                 </span>
                 <span>
                     <button class="button button-secondary">
-                        Quản lí danh mục hàng
+                        Quản lí danh mục sản phẩm
                     </button>
                     <button class="button button-primary">
                         <i class="fas fa-plus"></i>
