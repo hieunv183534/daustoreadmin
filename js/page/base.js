@@ -1,5 +1,6 @@
 ﻿class Base {
     constructor() {
+        this.API = new BaseApi();
         this.initEventBase();
         this.liveTime();
     }
@@ -47,7 +48,7 @@
 
         // sự kiện click btn logout
         document.querySelector(".item-option.btn-logout").addEventListener('click', () => {
-            window.location.href = "../../index.html";
+            window.location.href = "../index.html";
         });
 
         if (document.querySelector('.paging-bar')) {

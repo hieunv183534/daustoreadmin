@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/layout/main-layout.css">
     <link rel="stylesheet" href="../css/layout/home-layout.css">
+    <script src="../lib/jquery-3.6.0.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
 </head>
 
 <body>
@@ -75,34 +77,7 @@
                 </span>
             </div>
             <div class="content-content">
-                <div class="home-row"><h2>THÔNG TIN THỐNG KÊ DÂU STORE</h2></div>
-                <div class="home-row">
-                    <p>Tổng số loại sản phẩm đang bán : 100</p>
-                </div>
-                <div class="home-row">
-                    <p>Giá cao nhất : 10000000đ</p>
-                </div>
-                <div class="home-row">
-                    <p>Giá thấp nhất : 10000đ</p>
-                </div>
-                <div class="home-row">
-                    <p>Số đơn trong ngày : 100 đơn</p>
-                </div>
-                <div class="home-row">
-                    <p>Số đơn trong tuần : 1000 đơn</p>
-                </div>
-                <div class="home-row">
-                    <p>Số đơn trong tháng : 10000 đơn</p>
-                </div>
-                <div class="home-row">
-                    <p>Doanh thu trong ngày : 1000000đ</p>
-                </div>
-                <div class="home-row">
-                    <p>Doanh thu trong tuần : 10000000đ</p>
-                </div>
-                <div class="home-row">
-                    <p>Doanh thu trong tháng : 100000000đ</p>
-                </div>
+                <div id="chartContainer" style="height: 370px; width: 90%; max-width: 920px; margin: 0px auto;"></div>
             </div>
         </div>
     </div>
@@ -125,6 +100,7 @@
 
     <script src="../js/model/tableColums.js"></script>
     <script src="../js/common/common.js"></script>
+    <script src="../js/api/baseApi.js"></script>
     <script src="../js/page/base.js"></script>
     <script src="../js/page/homePage.js"></script>
 </body>
