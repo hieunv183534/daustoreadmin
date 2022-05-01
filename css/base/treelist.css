@@ -127,7 +127,7 @@ nav.tree-nav div.tree-nav__item-title .tool .tool-option:hover{
 }
 
 div.tree-nav__item-title.active{
-    background-color: #186CD8;
+    background-color: #186CD8 !important;
 }
 
 .picked-category{

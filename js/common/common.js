@@ -445,6 +445,9 @@ function formatDate(_date) {
 //-------------------------------------------------------------------------------------------------------------------------------
 //----------------- Tree List Category ------------------------------------------------------------------------------------------
 function loadListCategory(listCategory) {
+    document.querySelector('#category').append(parseHTML(`<div class="tree-nav__item-title" code="">
+                                                                <p>Tất cả sản phẩm</p>
+                                                            </div>`));
 
     // thêm thuộc tính: hasSimpleChild cho các category
     for (i = 0; i < listCategory.length; i++) {
@@ -453,6 +456,8 @@ function loadListCategory(listCategory) {
             break;
         }
     }
+
+
     // ý tưởng: duyệt qua hết categorys. Nếu gặp isExpandable thì tạo thẻ expandable , nếu hasSimpleChild thì tạo luôn div để chứa các con simple sau đó append vào cha
     // Nếu gặp isExpandable là false thì append vào div chứa con của cha
     listCategory.forEach(category => {
@@ -481,6 +486,9 @@ function loadListCategory(listCategory) {
 };
 
 function loadListCategoryx(listCategory) {
+    document.querySelector('#categoryx').append(parseHTML(`<div class="tree-nav__item-title" code="" name="Tất cả sản phẩm">
+                                                                <p>Tất cả sản phẩm</p>
+                                                            </div>`));
 
     // thêm thuộc tính: hasSimpleChild cho các category
     for (i = 0; i < listCategory.length; i++) {
@@ -489,13 +497,15 @@ function loadListCategoryx(listCategory) {
             break;
         }
     }
+
+
     // ý tưởng: duyệt qua hết categorys. Nếu gặp isExpandable thì tạo thẻ expandable , nếu hasSimpleChild thì tạo luôn div để chứa các con simple sau đó append vào cha
     // Nếu gặp isExpandable là false thì append vào div chứa con của cha
     listCategory.forEach(category => {
         let parentElement = document.querySelector(`#categoryx${category.parentCode}`);
 
         if (!category.isExpandable) {
-            let str = `<div class="tree-nav__item-title" id="categoryx${category.categoryCode}" code="${category.categoryCode}">
+            let str = `<div class="tree-nav__item-title" id="categoryx${category.categoryCode}" code="${category.categoryCode}" name="${category.categoryName}">
                             <p>${category.categoryName}</p>
                         </div>`;
             let categoryElement = parseHTML(str);
@@ -505,8 +515,57 @@ function loadListCategoryx(listCategory) {
             let str = `<details class="tree-nav__item is-expandable" id="categoryx${category.categoryCode}">
                             <summary class="tree-nav__item-title">${category.categoryName}</summary>
                             <div class="tree-nav__item">
-                                <div class="tree-nav__item-title" code="${category.categoryCode}">
+                                <div class="tree-nav__item-title" code="${category.categoryCode}" name="${category.categoryName}">
                                     <p>Tất cả</p>
+                                </div>
+                            </div>
+                        </details>`;
+            let categoryElement = parseHTML(str);
+            parentElement.append(categoryElement);
+        }
+    });
+};
+
+function loadListCategoryForm(listCategory) {
+    let toolStr = `<div class="tool">
+                        <div class="tool-option add"><i class="fa-solid fa-plus"></i></div>
+                        <div class="tool-option edit"><i class="fa-solid fa-pen-clip"></i></div>
+                        <div class="tool-option delete"><i class="fa-solid fa-minus"></i></div>
+                    </div>`;
+    document.querySelector('#category_form').append(parseHTML(`<div class="tree-nav__item-title"  code="">
+                                                                    <p>Tất cả sản phẩm</p>
+                                                                    <div class="tool">
+                                                                        <div class="tool-option add"><i class="fa-solid fa-plus"></i></div>
+                                                                    </div>
+                                                                </div>`));
+
+    // thêm thuộc tính: hasSimpleChild cho các category
+    for (i = 0; i < listCategory.length; i++) {
+        if ((listCategory[i].parentCode === '') && !listCategory[i].isExpandable) {
+            document.querySelector('#category_form').append(parseHTML(`<div class="tree-nav__item"></div>`));
+            break;
+        }
+    }
+    // ý tưởng: duyệt qua hết categorys. Nếu gặp isExpandable thì tạo thẻ expandable , nếu hasSimpleChild thì tạo luôn div để chứa các con simple sau đó append vào cha
+    // Nếu gặp isExpandable là false thì append vào div chứa con của cha
+    listCategory.forEach(category => {
+        let parentElement = document.querySelector(`#category_form${category.parentCode}`);
+
+        if (!category.isExpandable) {
+            let str = `<div class="tree-nav__item-title" id="category_form${category.categoryCode}" code="${category.categoryCode}" categoryId=${category.categoryId} name="${category.categoryName}">
+                            <p>${category.categoryName}</p>
+                            ${toolStr}
+                        </div>`;
+            let categoryElement = parseHTML(str);
+            if (parentElement.querySelector('.tree-nav__item'))
+                parentElement.querySelector('.tree-nav__item').append(categoryElement);
+        } else {
+            let str = `<details class="tree-nav__item is-expandable" id="category_form${category.categoryCode}">
+                            <summary class="tree-nav__item-title">${category.categoryName}</summary>
+                            <div class="tree-nav__item">
+                                <div class="tree-nav__item-title" code="${category.categoryCode}" categoryId=${category.categoryId} name="${category.categoryName}">
+                                    <p>Tất cả</p>
+                                    ${toolStr}
                                 </div>
                             </div>
                         </details>`;

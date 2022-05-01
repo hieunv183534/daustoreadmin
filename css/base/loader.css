@@ -1,5 +1,5 @@
 .loader {
-    z-index: 450;
+    z-index: 1450;
 }
 
 .loader-modal {
@@ -10,7 +10,7 @@
     right: 0;
     background-color: #fff;
     opacity: 0.4;
-    z-index: 444;
+    z-index: 1444;
 }
 
 .loader[isShow='show'] {
@@ -41,6 +41,6 @@
     background-image: url('../../assets/img/loader.svg');
     background-repeat: no-repeat;
     background-size: contain;
-    z-index: 445;
+    z-index: 1445;
     animation: rotate 0.1s linear infinite;
 }
