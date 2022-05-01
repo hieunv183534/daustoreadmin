@@ -27,11 +27,17 @@ class listColums {
             field: 'saleRate'
         },
         {
-            title: "Mô tả sản phẩm",
-            width: "min-width: 200px; max-width:1000px;",
+            title: "Danh mục",
+            width: "min-width: 200px;",
             style: "text-align: center;",
-            field: 'itemDescription'
+            field: 'categoryCode'
         },
+        {
+            title: "Thẻ",
+            width: "min-width: 200px;",
+            style: "text-align: center;",
+            field: 'tag'
+        }
     ]
 
     static Orders = [

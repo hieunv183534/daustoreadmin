@@ -73,85 +73,20 @@
                     <div class="category-bar">
                         <div class="category-main">Tất cả sản phẩm</div>
                         <div class="category-content">
-                            <nav class="tree-nav">
-                                <div class="tree-nav__item-title">
+                            <nav class="tree-nav" id="category">
+                                <div class="tree-nav__item-title" code="">
                                     <p>Tất cả sản phẩm</p>
                                 </div>
-                                <details class="tree-nav__item is-expandable">
-                                    <summary class="tree-nav__item-title">Quần áo</summary>
-                                    <div class="tree-nav__item">
-                                        <div class="tree-nav__item-title">
-                                            <p>Tất cả</p>
-                                        </div>
-                                        <div class="tree-nav__item-title">
-                                            <p>Áo</p>
-                                        </div>
-                                        <div class="tree-nav__item-title">
-                                            <p>Mũ</p>
-                                        </div>
-                                        <div class="tree-nav__item-title">
-                                            <p>Giày</p>
-                                        </div>
-                                    </div>
-                                    <details class="tree-nav__item is-expandable">
-                                        <summary class="tree-nav__item-title">Quần</summary>
-                                        <div class="tree-nav__item">
-                                            <div class="tree-nav__item-title">
-                                                <p>Tất cả</p>
-                                            </div>
-                                            <div class="tree-nav__item-title">
-                                                <p>Quần jean</p>
-                                            </div>
-                                            <div class="tree-nav__item-title">
-                                                <p>Quần đùi</p>
-                                            </div>
-                                        </div>
-                                    </details>
-                                </details>
-                                <details class="tree-nav__item is-expandable">
-                                    <summary class="tree-nav__item-title">Phụ kiện</summary>
-                                    <div class="tree-nav__item">
-                                        <div class="tree-nav__item-title">
-                                            <p>Tất cả</p>
-                                        </div>
-                                        <div class="tree-nav__item-title">
-                                            <p>Bông tai</p>
-                                        </div>
-                                        <div class="tree-nav__item-title">
-                                            <p>Nhẫn</p>
-                                        </div>
-                                        <div class="tree-nav__item-title">
-                                            <p>Dây chuyền</p>
-                                        </div>
-                                    </div>
-                                </details>
-                                <details class="tree-nav__item is-expandable">
-                                    <summary class="tree-nav__item-title">Đồ ăn</summary>
-                                    <div class="tree-nav__item">
-                                        <div class="tree-nav__item-title">
-                                            <p>Tất cả</p>
-                                        </div>
-                                        <div class="tree-nav__item-title">
-                                            <p>Nhung hươu</p>
-                                        </div>
-                                        <div class="tree-nav__item-title">
-                                            <p>Yến sào</p>
-                                        </div>
-                                        <div class="tree-nav__item-title">
-                                            <p>Đông trùng</p>
-                                        </div>
-                                    </div>
-                                </details>
                             </nav>
                         </div>
                     </div>
-                    <input type="text" class="input search-box" placeholder="Tìm theo tên, mã hàng">
+                    <input type="text" class="input search-box" id="inputSearch" placeholder="Tìm theo tên, mã hàng">
                 </span>
                 <span>
-                    <button class="button button-secondary">
+                    <button class="button button-secondary" id="btnCategory">
                         Quản lí danh mục sản phẩm
                     </button>
-                    <button class="button button-primary">
+                    <button class="button button-primary" id="btnAddItem">
                         <i class="fas fa-plus"></i>
                         Thêm mặt hàng mới
                     </button>
@@ -174,25 +109,25 @@
                         <div class="paging-bar-right">
                             <div class="dropdown last-dropdown" style="border:none;">
                                 <button class="dropdown-main">
-                                    <p>100</p>
+                                    <p>10</p>
                                     <div class="icon"><i class="fas fa-chevron-down"></i></div>
                                 </button>
                                 <div class="dropdown-data">
-                                    <div class="dropdown-item" valuename="200">
-                                        <i class="fas fa-check"></i>
-                                        <p>200</p>
-                                    </div>
-                                    <div class="dropdown-item item-selected" valuename="100">
-                                        <i class="fas fa-check"></i>
-                                        <p>100</p>
-                                    </div>
-                                    <div class="dropdown-item" valuename="50">
-                                        <i class="fas fa-check"></i>
-                                        <p>50</p>
-                                    </div>
                                     <div class="dropdown-item" valuename="20">
                                         <i class="fas fa-check"></i>
                                         <p>20</p>
+                                    </div>
+                                    <div class="dropdown-item item-selected" valuename="10">
+                                        <i class="fas fa-check"></i>
+                                        <p>10</p>
+                                    </div>
+                                    <div class="dropdown-item" valuename="5">
+                                        <i class="fas fa-check"></i>
+                                        <p>5</p>
+                                    </div>
+                                    <div class="dropdown-item" valuename="2">
+                                        <i class="fas fa-check"></i>
+                                        <p>2</p>
                                     </div>
                                 </div>
                             </div>
@@ -217,38 +152,61 @@
                 <div class="form-title">
                     <h2>Thông tin sản phẩm</h2>
                 </div>
-                <div class="close-from"> <i class="fas fa-times"></i> </div>
+                <div class="close-from" id="closeFormData"> <i class="fas fa-times"></i> </div>
             </div>
             <div class="form-body">
                 <div class="row">
                     <div class="form-item divide-2-3-row">
                         <div class="item-title">Tên sản phẩm:</div>
-                        <input type="text" class="input">
+                        <input type="text" class="input" id="valueCategoryName">
                     </div>
                     <div class="form-item divide-3-row">
                         <div class="item-title">Mã sản phẩm:</div>
-                        <input type="text" class="input" disabled>
+                        <input type="text" class="input" disabled id="valueCategoryCode">
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-item divide-3-row">
                         <div class="item-title">Giá gốc:</div>
-                        <input type="number" class="input">
+                        <input type="number" class="input" id="valueRealPrice">
                     </div>
                     <div class="form-item divide-3-row">
                         <div class="item-title">Phần trăm khuyến mãi: </div>
-                        <input type="number" class="input">
+                        <input type="number" class="input" id="valueSaleRate">
                     </div>
                     <div class="form-item divide-3-row">
                         <div class="item-title">Giá khuyến mãi:</div>
-                        <input type="number" class="input">
+                        <input type="number" class="input" id="valueSalePrice">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-item divide-2-3-row">
+                        <div class="item-title">Thẻ: </div>
+                        <div class="tag-choose" id="valueTag">
+                            <div class="tag-item checked" id="checkboxTagNew">Hàng mới về</div>
+                            <div class="tag-item" id="checkboxTagHot">Hàng được mua nhiều</div>
+                            <div class="tag-item" id="checkboxTagSale">Khuyến mãi</div>
+                        </div>
+                    </div>
+                    <div class="form-item divide-3-row">
+                        <div class="item-title">Danh mục: </div>
+                        <div class="category-bar" id="valueCategoryCode">
+                            <div class="category-main">Tất cả sản phẩm</div>
+                            <div class="category-content">
+                                <nav class="tree-nav" id="categoryx">
+                                    <div class="tree-nav__item-title" code="">
+                                        <p>Tất cả sản phẩm</p>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-item divide-1-row">
                         <div class="item-title">Chi tiết sản phẩm: </div>
                         <div class="textarea-wrapper">
-                            <textarea id="valueAddress"></textarea>
+                            <textarea id="valueDescription"></textarea>
                         </div>
                     </div>
                 </div>
@@ -256,7 +214,7 @@
                     <div class="form-item divide-1-row">
                         <div class="item-title">Danh sách media:<span style="font-size: 10px; font-weight: normal;">(Mặc
                                 định media đầu danh sách là avatar)</span> </div>
-                        <div class="list-media">
+                        <div class="list-media" id="valueItems">
                             <img src="https://firebasestorage.googleapis.com/v0/b/daustore.appspot.com/o/ratio-pref-1-1.png?alt=media"
                                 alt="">
                             <img src="https://firebasestorage.googleapis.com/v0/b/daustore.appspot.com/o/ratio-pref-1-1.png?alt=media"
@@ -305,7 +263,7 @@
                 <div class="form-title">
                     <h2>Loại sản phẩm</h2>
                 </div>
-                <div class="close-from"> <i class="fas fa-times"></i> </div>
+                <div class="close-from" id="closeCategory"> <i class="fas fa-times"></i> </div>
             </div>
             <div class="form-body">
                 <div class="row">

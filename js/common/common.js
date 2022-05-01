@@ -95,6 +95,7 @@ function setValueCbb(cbbElement, value) {
 
 //-------------------------table-------------------------------------------------------------------------------------------
 function loadTable(columns, datas, startIndex) {
+    console.log(datas);
     var index = startIndex;
     document.querySelector("table").innerHTML = "";
 
@@ -441,50 +442,76 @@ function formatDate(_date) {
         return '';
     }
 }
-//-----------qr code---------------------------------------------------------------------------------------------------
-
-const cipher = salt => {
-    const textToChars = text => text.split('').map(c => c.charCodeAt(0));
-    const byteHex = n => ("0" + Number(n).toString(16)).substr(-2);
-    const applySaltToChar = code => textToChars(salt).reduce((a,b) => a ^ b, code);
-
-    return text => text.split('')
-      .map(textToChars)
-      .map(applySaltToChar)
-      .map(byteHex)
-      .join('');
-}
-
-if (document.querySelector('.btn-showqr')) {
-    document.querySelector('.btn-showqr').addEventListener('click', () => {
-        var phoneNumber = sessionStorage.getItem('phoneNumber');
-        const myCipher = cipher('mySecretSalt')
-        var phoneEncrypt = myCipher(phoneNumber);
-        console.log(phoneEncrypt);
-        var data = `https://hieunv183534.github.io/covidmanagement/page/qrcode/user-info.html?phoneNumber=${phoneEncrypt}`;
-        showQrCode(data);
-    })
-}
-
-function showUnitQr(unitCode){
-    var data = `https://hieunv183534.github.io/covidmanagement/page/qrcode/unit-info.html?unitCode=${unitCode}`;
-    showQrCode(data);
-}
-
-function showQrCode(data) {
-    console.log(data);
-    var qr = parseHTML(`<div class="qr">
-                            <div class="qr-modal"></div>
-                            
-                        </div>`);
-    var qrContent = parseHTML(`<div class="qr-content">
-                                    <img src="https://api.qrserver.com/v1/create-qr-code/?data=${data}&size=300x300" alt="">
-                                </div>`);
-    qr.append(qrContent);
-    qr.addEventListener('click',()=>{
-        qr.remove();
-    })
-    document.body.appendChild(qr);
-}
 //-------------------------------------------------------------------------------------------------------------------------------
+//----------------- Tree List Category ------------------------------------------------------------------------------------------
+function loadListCategory(listCategory) {
 
+    // thêm thuộc tính: hasSimpleChild cho các category
+    for (i = 0; i < listCategory.length; i++) {
+        if ((listCategory[i].parentCode === '') && !listCategory[i].isExpandable) {
+            document.querySelector('#category').append(parseHTML(`<div class="tree-nav__item"></div>`));
+            break;
+        }
+    }
+    // ý tưởng: duyệt qua hết categorys. Nếu gặp isExpandable thì tạo thẻ expandable , nếu hasSimpleChild thì tạo luôn div để chứa các con simple sau đó append vào cha
+    // Nếu gặp isExpandable là false thì append vào div chứa con của cha
+    listCategory.forEach(category => {
+        let parentElement = document.querySelector(`#category${category.parentCode}`);
+
+        if (!category.isExpandable) {
+            let str = `<div class="tree-nav__item-title" id="category${category.categoryCode}" code="${category.categoryCode}">
+                            <p>${category.categoryName}</p>
+                        </div>`;
+            let categoryElement = parseHTML(str);
+            if (parentElement.querySelector('.tree-nav__item'))
+                parentElement.querySelector('.tree-nav__item').append(categoryElement);
+        } else {
+            let str = `<details class="tree-nav__item is-expandable" id="category${category.categoryCode}">
+                            <summary class="tree-nav__item-title">${category.categoryName}</summary>
+                            <div class="tree-nav__item">
+                                <div class="tree-nav__item-title" code="${category.categoryCode}">
+                                    <p>Tất cả</p>
+                                </div>
+                            </div>
+                        </details>`;
+            let categoryElement = parseHTML(str);
+            parentElement.append(categoryElement);
+        }
+    });
+};
+
+function loadListCategoryx(listCategory) {
+
+    // thêm thuộc tính: hasSimpleChild cho các category
+    for (i = 0; i < listCategory.length; i++) {
+        if ((listCategory[i].parentCode === '') && !listCategory[i].isExpandable) {
+            document.querySelector('#categoryx').append(parseHTML(`<div class="tree-nav__item"></div>`));
+            break;
+        }
+    }
+    // ý tưởng: duyệt qua hết categorys. Nếu gặp isExpandable thì tạo thẻ expandable , nếu hasSimpleChild thì tạo luôn div để chứa các con simple sau đó append vào cha
+    // Nếu gặp isExpandable là false thì append vào div chứa con của cha
+    listCategory.forEach(category => {
+        let parentElement = document.querySelector(`#categoryx${category.parentCode}`);
+
+        if (!category.isExpandable) {
+            let str = `<div class="tree-nav__item-title" id="categoryx${category.categoryCode}" code="${category.categoryCode}">
+                            <p>${category.categoryName}</p>
+                        </div>`;
+            let categoryElement = parseHTML(str);
+            if (parentElement.querySelector('.tree-nav__item'))
+                parentElement.querySelector('.tree-nav__item').append(categoryElement);
+        } else {
+            let str = `<details class="tree-nav__item is-expandable" id="categoryx${category.categoryCode}">
+                            <summary class="tree-nav__item-title">${category.categoryName}</summary>
+                            <div class="tree-nav__item">
+                                <div class="tree-nav__item-title" code="${category.categoryCode}">
+                                    <p>Tất cả</p>
+                                </div>
+                            </div>
+                        </details>`;
+            let categoryElement = parseHTML(str);
+            parentElement.append(categoryElement);
+        }
+    });
+};

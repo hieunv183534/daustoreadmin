@@ -1,5 +1,8 @@
 ﻿class Base {
     constructor() {
+        this.index = 0;
+        this.count = 10;
+        this.total = 0;
         this.API = new BaseApi();
         this.initEventBase();
         this.liveTime();
@@ -45,7 +48,6 @@
             }, 500);
         });
 
-
         // sự kiện click btn logout
         document.querySelector(".item-option.btn-logout").addEventListener('click', () => {
             window.location.href = "../index.html";
@@ -53,18 +55,24 @@
 
         if (document.querySelector('.paging-bar')) {
             document.querySelectorAll('.paging-bar .dropdown-item').forEach(item => {
-               console.log("Chọn số bản ghi");
+                item.addEventListener('click', () => {
+                    this.count = Number(item.getAttribute('valuename'));
+                    this.index = 0;
+                    this.changeCount();
+                })
             });
 
             document.querySelector(".paging-bar .next-page").addEventListener('click', () => {
-                console.log("Trang tiếp");
+                this.index += this.count;
+                this.nextPage();
             });
 
             document.querySelector(".paging-bar .pre-page").addEventListener('click', () => {
                 if ((this.index - this.count) < 0) {
                     this.index = 0;
                 } else {
-                    console.log("Trang trước");
+                    this.index -= this.count;
+                    this.prePage();
                 }
             });
         };
@@ -72,7 +80,7 @@
 
     reloadPagingInfo() {
         document.querySelector('#pagingInfo').innerHTML =
-            `Hiển thị bản ghi từ ${this.index + 1} đến ${this.index + this.total}`;
+            `Hiển thị bản ghi từ ${this.index + 1} đến ${((this.index + this.count) > this.total) ? this.total : (this.index + this.count) } trên tổng ${this.total}`;
     }
 
     menuItemOnClick(thisElement) {
@@ -99,4 +107,8 @@
             })
         });
     }
+
+    changeCount() {}
+    prePage() { }
+    nextPage() { }
 }

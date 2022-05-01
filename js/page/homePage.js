@@ -14,33 +14,10 @@ class HomePage extends Base {
     }
 
     initEvent() {
+    }
 
-        let order = {
-            "orderCode": "DH16513283616798",
-            "buyerName": "Nguyễn Bảo Trâm111",
-            "phone": "0974300198",
-            "address": "32 Bằng Liệt",
-            "unitCode": "unitCode",
-            "status": 2,
-            "paymentMethod": 1,
-            "paymentStatus": true,
-            "items": "2|a802a0e8-c81c-11ec-b950-00155e1f4204|139999",
-            "totalMoney": 139999,
-            "ship": "Đơn hàng trên 200k sẽ được free ship! Hàng sẽ được giao từ 2-7 ngày tùy nơi đặt.",
-            "shipPayStatus": true,
-            "note": "string",
-            "voucherId": "00000000-0000-0000-0000-000000000000",
-            "createdAt": "2022-04-30T07:19:22",
-            "modifiedAt": "0001-01-01T00:00:00"
-        };
-
-        this.API.deleteOrder('880d2686-c890-11ec-b950-00155e1f4204').done(res=>{
-            console.log(res);
-        }).fail(err=>{
-            console.log(err.responseJSON);
-            console.log(err);
-        })
-
+    changeCount(){
+        alert("change count")
     }
 }
 
