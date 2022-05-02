@@ -86,4 +86,32 @@ class listColums {
             format: 'boolean'
         }
     ];
+
+
+    static Vouchers = [
+        {
+            title : "Mã khuyến mãi",
+            width : "min-width: 200px;",
+            style : "text-align: center;",
+            field: 'voucherCode'
+        },
+        {
+            title : "Mô tả khuyến mãi",
+            width : "min-width: 600px;",
+            style : "text-align: center;",
+            field: 'description'
+        },
+        {
+            title : "Ngày hết hạn",
+            width : "min-width: 200px;",
+            style : "text-align: center;",
+            field: 'dateExpired'
+        },
+        {
+            title : "Số lượng",
+            width : "min-width: 200px;",
+            style : "text-align: center;",
+            field: 'quota'
+        }
+    ];
 }

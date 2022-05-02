@@ -241,10 +241,10 @@ class BaseApi {
         })
     }
 
-    getVouchers(index = 0, count = 50, searchTerms = null) {
+    getVouchers(index = 0, count = 50, searchTerms = null, canuseState = 0) {
         let _searchTerms = (searchTerms == null) ? '' : `&searchTerms=${searchTerms}`;
         return $.ajax({
-            url: this.baseUrl + `getVouchers?index=${index}&count=${count}${_searchTerms}`,
+            url: this.baseUrl + `getVouchers?index=${index}&count=${count}&canuseState=${canuseState}${_searchTerms}`,
             method: 'GET',
             headers: { "Authorization": this.accessToken }
         })

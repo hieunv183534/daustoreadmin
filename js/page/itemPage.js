@@ -104,7 +104,7 @@ class ItemPage extends Base {
             listValueSelector.forEach(selector => {
                 let element = document.querySelector(selector);
                 element.classList.remove('validate-field');
-                element.title = null;
+                element.title = '';
             })
             this.API.getNewItemCode().done(res => {
                 document.querySelector('#valueItemCode').value = res.data;
@@ -293,7 +293,7 @@ class ItemPage extends Base {
             this.initEventTable();
             this.reloadPagingInfo();
         }).fail(err => {
-            showToastMessenger('danger', "Có lỗi")
+            showToastMessenger('danger', "Có lỗi");
         })
     }
 
