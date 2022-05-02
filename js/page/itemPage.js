@@ -66,17 +66,14 @@ class ItemPage extends Base {
 
     initEvent() {
 
-        inputSearch.addEventListener('keypress', function (e) {
+        inputSearch.addEventListener('keypress', e => {
             if (e.key === 'Enter') {
-                this.loadListItem(inputSearch.value, null, this.index, this.count);
+                this.loadListItem(inputSearch.value, this.categoryCode, this.index, this.count);
             }
         });
 
         btnRefresh.addEventListener('click', () => {
-            inputSearch.value = '';
-            this.index = 0;
-            this.count = 10;
-            this.loadListItem(inputSearch.value, null, this.index, this.count);
+            window.location.reload();
         });
 
         btnCategory.addEventListener('click', () => {
@@ -88,13 +85,27 @@ class ItemPage extends Base {
         });
 
         btnAddItem.addEventListener('click', () => {
+
+            // reset lại form
+            document.querySelector('#valueItemName').value = '';
+            document.querySelector('#valueItemCode').value = '';
+            document.querySelector('#valueRealPrice').value = '';
+            document.querySelector('#valueSaleRate').value = '';
+            document.querySelector('#valueCategoryCode .category-main').innerHTML = 'Tất cả sản phẩm';
+            document.querySelector('#valueCategoryCode').setAttribute('value', '');
+            document.querySelector('#valueDescription').value = "";
+            document.querySelector('#valueMedias').setAttribute('value', "");
+            listMedia.innerHTML = '';
+            document.querySelector('#valueTag').setAttribute('value', "");
+            this.setValueTag('');
+
+            // đưa form về dạng chưa cảnh báo
             let listValueSelector = ['#valueItemName', '#valueRealPrice', '#valueSaleRate', '#valueDescription', '#valueMedias'];
             listValueSelector.forEach(selector => {
                 let element = document.querySelector(selector);
                 element.classList.remove('validate-field');
                 element.title = null;
             })
-            // đưa form về dạng chưa cảnh báo
             this.API.getNewItemCode().done(res => {
                 document.querySelector('#valueItemCode').value = res.data;
                 this.newCode = res.data;
@@ -129,7 +140,6 @@ class ItemPage extends Base {
 
         btnUpdateCategory.addEventListener('click', () => {
             this.formCategory.categoryName = document.querySelector('#valueCategoryName').value;
-            console.log((this.formCategory));
             if ((!this.formCategory.categoryName)) {
                 showToastMessenger('danger', "Chưa đủ dữ liệu để cập nhật danh mục!")
             } else {
@@ -144,7 +154,7 @@ class ItemPage extends Base {
                     btns[1].addEventListener('click', () => {
                         this.API.addCategory({
                             categoryName: this.formCategory.categoryName,
-                            parentCode: this.formCategory.categoryCode
+                            parentCode: (this.formCategory.categoryCode === '') ? 'xxx' : this.formCategory.categoryCode
                         }).done(res => {
                             showToastMessenger('success', "Thêm mới thành công một danh mục!");
                             hidePopupDialog();
@@ -205,7 +215,7 @@ class ItemPage extends Base {
                         document.querySelector('#valueMedias').classList.remove('validate-field');
                     }
                 )
-            }else{
+            } else {
                 showToastMessenger('danger', "Vui lòng chọn file từ máy trước!")
             }
         })
@@ -216,7 +226,6 @@ class ItemPage extends Base {
             img.addEventListener('dblclick', () => {
                 let medias = listMedia.getAttribute('value');
                 medias = medias.trim().split(' ');
-
                 var popupBtns = [{ text: "Đóng", enable: true }, { text: "Đặt làm avatar", enable: true }, { text: "Xóa", enable: true }]
                 var btns = showPopupDialog("Thông báo", `Bạn muốn làm gì với media này?`, popupBtns);
                 btns[0].addEventListener('click', () => {
@@ -277,9 +286,9 @@ class ItemPage extends Base {
     }
 
     loadListItem(searchTerms, categoryCode, index, count) {
-        console.log({ searchTerms, categoryCode, index, count });
-        this.API.getItems(null, searchTerms, null, 1, index, count).done(res => {
-            // loadTable(listColums.Items, res.data.data, this.index + 1);
+        console.log(JSON.stringify({ searchTerms, categoryCode, index, count }));
+        this.API.getItems(categoryCode, searchTerms, null, 1, index, count).done(res => {
+            loadTable(listColums.Items, res.data.data, this.index + 1);
             this.total = res.data.total;
             this.initEventTable();
             this.reloadPagingInfo();
@@ -293,7 +302,6 @@ class ItemPage extends Base {
         document.querySelector('#categoryx').innerHTML = '';
         document.querySelector('#category_form').innerHTML = '';
         this.API.getCategorys().done(res => {
-            console.log(res.data);
             this.listCategory = res.data;
             loadListCategory(res.data);
             loadListCategoryx(res.data);
@@ -311,10 +319,42 @@ class ItemPage extends Base {
             hidePopupDialog();
         });
         btns[1].addEventListener('click', () => {
-            alert("Show popup cập nhật mặt hàng");
+            this.formItemMode = 'update';
+            console.log(JSON.stringify(item));
+
+            // bind dữ liệu item lên form;
+            this.newCode = item.itemCode;
+            this.formItem.itemId = item.itemId;
+            document.querySelector('#valueItemName').value = item.itemName;
+            document.querySelector('#valueItemCode').value = item.itemCode;
+            document.querySelector('#valueRealPrice').value = item.realPrice;
+            document.querySelector('#valueSaleRate').value = item.saleRate;
+            document.querySelector('#valueCategoryCode .category-main').innerHTML = item.categoryName;
+            document.querySelector('#valueCategoryCode').setAttribute('value', item.categoryCode);
+            document.querySelector('#valueDescription').value = item.description;
+            document.querySelector('#valueMedias').setAttribute('value', item.medias);
+            this.loadListMedia(item.medias);
+            document.querySelector('#valueTag').setAttribute('value', item.tag);
+            this.setValueTag(item.tag);
+            formData.show();
+            hidePopupDialog();
         });
         btns[2].addEventListener('click', () => {
-            alert("Xóa mặt hàng");
+            hidePopupDialog();
+            var popupBtns = [{ text: "Không", enable: true }, { text: "Xóa", enable: true }, { text: "Xóa", enable: false }]
+            var btns = showPopupDialog("Thông báo", `Bạn chắc chắn muốn xóa mặt hàng <b>${item.itemName}</b>`, popupBtns);
+            btns[0].addEventListener('click', () => {
+                hidePopupDialog();
+            });
+            btns[1].addEventListener('click', () => {
+                this.API.deleteItem(item.itemId).done(res => {
+                    showToastMessenger('success', "Xóa thành công");
+                    hidePopupDialog();
+                    thisTr.remove();
+                }).fail(err => {
+                    showToastMessenger('danger', err.responseJSON);
+                })
+            });
         });
     }
 
@@ -333,14 +373,31 @@ class ItemPage extends Base {
         }
     }
 
+    setValueTag(tag){
+        console.log(tag);
+        document.querySelectorAll('.tag-item').forEach(tagItem=>{
+            if(tag.includes(tagItem.getAttribute('data'))){
+                tagItem.classList.add('checked');
+            }else{
+                tagItem.classList.remove('checked');
+            }
+        });
+    }
+
     initEventTreeList() {
         // chọn category trong filter
         document.querySelectorAll('.function-bar div.tree-nav__item-title').forEach(element => {
             element.addEventListener('click', () => {
-                console.log(element.getAttribute('code'));
+                document.querySelectorAll('.function-bar div.tree-nav__item-title').forEach(e => {
+                    e.classList.remove('active');
+                });
+                element.classList.add('active');
+                document.querySelector('.function-bar .category-main').innerHTML = element.getAttribute('name');
                 this.categoryCode = element.getAttribute('code');
                 this.loadListItem(inputSearch.value, this.categoryCode, this.index, this.count);
-            })
+
+
+            });
         });
 
         //chọn category trong form
@@ -402,13 +459,32 @@ class ItemPage extends Base {
     formItemOnSubmit() {
         itemPage.formItem.itemName = document.querySelector('#valueItemName').value;
         itemPage.formItem.itemCode = document.querySelector('#valueItemCode').value;
-        itemPage.formItem.realPrice = document.querySelector('#valueRealPrice').value;
-        itemPage.formItem.saleRate = document.querySelector('#valueSaleRate').value;
+        itemPage.formItem.realPrice = Number(document.querySelector('#valueRealPrice').value);
+        itemPage.formItem.saleRate = Number(document.querySelector('#valueSaleRate').value);
         itemPage.formItem.tag = document.querySelector('#valueTag').getAttribute('value');
         itemPage.formItem.categoryCode = document.querySelector('#valueCategoryCode').getAttribute('value');
         itemPage.formItem.description = document.querySelector('#valueDescription').value;
-        itemPage.formItem.itemMedias = document.querySelector('#valueMedias').getAttribute('value');
+        itemPage.formItem.medias = document.querySelector('#valueMedias').getAttribute('value');
 
         console.log(itemPage.formItem);
+
+        if (itemPage.formItemMode === 'add') {
+            itemPage.API.addItem(itemPage.formItem).done(res => {
+                showToastMessenger('success', "Thêm mới mặt hàng thành công!");
+                formData.hide();
+                itemPage.loadListItem(inputSearch.value, itemPage.categoryCode, itemPage.index, itemPage.count);
+            }).fail(err => {
+                console.log(err);
+                showToastMessenger('danger', "Có lỗi, vui lòng thử lại!");
+            });
+        } else {
+            itemPage.API.updateItem(itemPage.formItem,itemPage.formItem.itemId).done(res=>{
+                showToastMessenger('success', "Cập nhật mặt hàng thành công!");
+                formData.hide();
+                itemPage.loadListItem(inputSearch.value, itemPage.categoryCode, itemPage.index, itemPage.count);
+            }).fail(err=>{
+                showToastMessenger('danger', "Có lỗi, vui lòng thử lại!");
+            })
+        }
     }
 }

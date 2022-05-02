@@ -95,7 +95,6 @@ function setValueCbb(cbbElement, value) {
 
 //-------------------------table-------------------------------------------------------------------------------------------
 function loadTable(columns, datas, startIndex) {
-    console.log(datas);
     var index = startIndex;
     document.querySelector("table").innerHTML = "";
 
@@ -116,7 +115,6 @@ function loadTable(columns, datas, startIndex) {
     </div>
     </th>`));
     thead.append(parseHTML(`<th style="text-align: right;"><p>STT</p></th>`));
-    console.log(thead);
     columns.forEach(col => {
         var th = parseHTML(`<th style="${col.style}"><p>${col.title}</p></th>`);
         thead.append(th);
@@ -445,7 +443,7 @@ function formatDate(_date) {
 //-------------------------------------------------------------------------------------------------------------------------------
 //----------------- Tree List Category ------------------------------------------------------------------------------------------
 function loadListCategory(listCategory) {
-    document.querySelector('#category').append(parseHTML(`<div class="tree-nav__item-title" code="">
+    document.querySelector('#category').append(parseHTML(`<div class="tree-nav__item-title" code="" name="Tất cả sản phẩm">
                                                                 <p>Tất cả sản phẩm</p>
                                                             </div>`));
 
@@ -464,7 +462,7 @@ function loadListCategory(listCategory) {
         let parentElement = document.querySelector(`#category${category.parentCode}`);
 
         if (!category.isExpandable) {
-            let str = `<div class="tree-nav__item-title" id="category${category.categoryCode}" code="${category.categoryCode}">
+            let str = `<div class="tree-nav__item-title" id="category${category.categoryCode}" code="${category.categoryCode}" name="${category.categoryName}">
                             <p>${category.categoryName}</p>
                         </div>`;
             let categoryElement = parseHTML(str);
@@ -474,7 +472,7 @@ function loadListCategory(listCategory) {
             let str = `<details class="tree-nav__item is-expandable" id="category${category.categoryCode}">
                             <summary class="tree-nav__item-title">${category.categoryName}</summary>
                             <div class="tree-nav__item">
-                                <div class="tree-nav__item-title" code="${category.categoryCode}">
+                                <div class="tree-nav__item-title" code="${category.categoryCode}"  name="${category.categoryName}">
                                     <p>Tất cả</p>
                                 </div>
                             </div>

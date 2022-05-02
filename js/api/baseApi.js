@@ -63,6 +63,7 @@ class BaseApi {
     }
 
     addCategory(category) {
+        console.log(category);
         return $.ajax({
             url: this.baseUrl + `addCategory`,
             method: 'POST',
@@ -109,7 +110,6 @@ class BaseApi {
     }
 
     addItem(item) {
-        console.log(item);
         return $.ajax({
             url: this.baseUrl + `addItem`,
             method: 'POST',

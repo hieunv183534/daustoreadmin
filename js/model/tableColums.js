@@ -30,7 +30,7 @@ class listColums {
             title: "Danh mục",
             width: "min-width: 200px;",
             style: "text-align: center;",
-            field: 'categoryCode'
+            field: 'categoryName'
         },
         {
             title: "Thẻ",
