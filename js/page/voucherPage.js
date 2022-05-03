@@ -78,39 +78,48 @@ class VoucherPage extends Base {
             });
         });
 
-        btnRenderDescription.addEventListener('click',()=>{
+        btnRenderDescription.addEventListener('click', () => {
             let voucherType = document.querySelector('#voucherType').getAttribute('value');
-            if(voucherType === 'percent'){
+            if (voucherType === 'percent') {
                 document.querySelector('#valueDescription').value =
-                 `Khuyến mãi ${document.querySelector('#valueSaleRate').value}% tối đa ${document.querySelector('#valueMaxNumber').value}đ cho đơn giá tối thiểu ${document.querySelector('#valueMinTotal').value}đ`;
-            }else{
+                    `Khuyến mãi ${document.querySelector('#valueSaleRate').value}% tối đa ${document.querySelector('#valueMaxNumber').value}đ cho đơn giá tối thiểu ${document.querySelector('#valueMinTotal').value}đ`;
+            } else {
                 document.querySelector('#valueDescription').value =
-                 `Khuyến mãi ${document.querySelector('#valueSaleNumber').value}đ cho đơn giá tối thiểu ${document.querySelector('#valueMinTotal').value}đ`;
+                    `Khuyến mãi ${document.querySelector('#valueSaleNumber').value}đ cho đơn giá tối thiểu ${document.querySelector('#valueMinTotal').value}đ`;
             }
         });
 
-        btnRefresh.addEventListener('click',()=>{
+        btnRefresh.addEventListener('click', () => {
             window.location.reload();
         });
 
-        document.querySelector('#canuse0').addEventListener('click',()=>{
+        document.querySelector('#canuse0').addEventListener('click', () => {
             this.isCanUse = 0;
+            this.loadListVoucher(inputSearch.value, this.isCanUse, this.index, this.count);
         });
-        document.querySelector('#canuse1').addEventListener('click',()=>{
+        document.querySelector('#canuse1').addEventListener('click', () => {
             this.isCanUse = 1;
+            this.loadListVoucher(inputSearch.value, this.isCanUse, this.index, this.count);
         });
-        document.querySelector('#canuse2').addEventListener('click',()=>{
+        document.querySelector('#canuse2').addEventListener('click', () => {
             this.isCanUse = 2;
+            this.loadListVoucher(inputSearch.value, this.isCanUse, this.index, this.count);
+        });
+
+        inputSearch.addEventListener('keypress', e => {
+            if (e.key === 'Enter') {
+                this.loadListVoucher(inputSearch.value, this.isCanUse, this.index, this.count);
+            }
         });
     }
 
-    loadListVoucher(searchTerms,canuseState,index,count){
-        this.API.getVouchers(this.index, this.count,searchTerms, canuseState).done(res=>{
-            loadTable(listColums.Vouchers, res.data.data, this.index + 1);
+    loadListVoucher(searchTerms, canuseState, index, count) {
+        this.API.getVouchers(index, count, searchTerms, canuseState).done(res => {
+            loadTable(listColums.Vouchers, res.data.data, index + 1);
             this.total = res.data.total;
             this.initEventTable();
             this.reloadPagingInfo();
-        }).fail(err=>{
+        }).fail(err => {
             showToastMessenger('danger', "Có lỗi");
         })
     };
@@ -131,7 +140,7 @@ class VoucherPage extends Base {
             document.querySelector('#valueQuota').value = voucher.quota;
             document.querySelector('#valueDateExpired').value = voucher.dateExpired;
             document.querySelector('#valueDescription').value = voucher.description;
-            document.querySelector('#valueSaleRate').value = !voucher.saleRate ? '' : voucher.saleRate*100 ;
+            document.querySelector('#valueSaleRate').value = !voucher.saleRate ? '' : voucher.saleRate * 100;
             document.querySelector('#valueMaxNumber').value = !voucher.maxNumber ? '' : voucher.maxNumber;
             document.querySelector('#valueSaleNumber').value = !voucher.saleNumber ? '' : voucher.saleNumber;
 
@@ -158,17 +167,17 @@ class VoucherPage extends Base {
     }
 
     changeCount() {
-        this.loadListVoucher(inputSearch.value , this.isCanUse, this.index,this.count);
+        this.loadListVoucher(inputSearch.value, this.isCanUse, this.index, this.count);
     }
     prePage() {
-        this.loadListVoucher(inputSearch.value , this.isCanUse, this.index,this.count);
+        this.loadListVoucher(inputSearch.value, this.isCanUse, this.index, this.count);
     }
     nextPage() {
         if (this.index >= this.total) {
             this.index -= this.count
             showToastMessenger('danger', "Đã đến trang cuối!")
         } else {
-            this.loadListVoucher(inputSearch.value , this.isCanUse, this.index,this.count);
+            this.loadListVoucher(inputSearch.value, this.isCanUse, this.index, this.count);
         }
     }
 
@@ -177,11 +186,11 @@ class VoucherPage extends Base {
         let b = document.querySelector('#valueMaxNumber').value;
         let c = document.querySelector('#valueSaleNumber').value;
         console.log(a, b, c);
-        if (c || (a && b)){
+        if (c || (a && b)) {
 
             // lấy giá trị từ các input
             voucherPage.formVoucher.voucherCode = document.querySelector('#valueVoucherCode').value;
-            voucherPage.formVoucher.saleRate = !document.querySelector('#valueSaleRate').value ? 0 : Number(document.querySelector('#valueSaleRate').value)/100;
+            voucherPage.formVoucher.saleRate = !document.querySelector('#valueSaleRate').value ? 0 : Number(document.querySelector('#valueSaleRate').value) / 100;
             voucherPage.formVoucher.maxNumber = !document.querySelector('#valueMaxNumber').value ? 0 : Number(document.querySelector('#valueMaxNumber').value);
             voucherPage.formVoucher.saleNumber = !document.querySelector('#valueSaleNumber').value ? 0 : Number(document.querySelector('#valueSaleNumber').value);
             voucherPage.formVoucher.minTotal = Number(document.querySelector('#valueMinTotal').value);
@@ -190,25 +199,25 @@ class VoucherPage extends Base {
             voucherPage.formVoucher.description = document.querySelector('#valueDescription').value;
 
             console.log(voucherPage.formVoucher);
-            if(voucherPage.formVoucherMode == 'add'){
-                voucherPage.API.addVoucher(voucherPage.formVoucher).done(res=>{
-                    showToastMessenger('success',"Thêm mới thành công voucher khuyến mãi!");
+            if (voucherPage.formVoucherMode == 'add') {
+                voucherPage.API.addVoucher(voucherPage.formVoucher).done(res => {
+                    showToastMessenger('success', "Thêm mới thành công voucher khuyến mãi!");
                     formData.hide();
-                    voucherPage.loadListVoucher(inputSearch.value , this.isCanUse, this.index,this.count);
-                }).fail(err=>{
-                    showToastMessenger('danger',"Có lỗi vui lòng thử lại!")
+                    voucherPage.loadListVoucher(inputSearch.value, this.isCanUse, this.index, this.count);
+                }).fail(err => {
+                    showToastMessenger('danger', "Có lỗi vui lòng thử lại!")
                 });
-            }else{
-                voucherPage.API.updateVoucher(voucherPage.formVoucher,voucherPage.formVoucher.voucherId).done(res=>{
-                    showToastMessenger('success',"Cập nhật thành công voucher khuyến mãi!");
+            } else {
+                voucherPage.API.updateVoucher(voucherPage.formVoucher, voucherPage.formVoucher.voucherId).done(res => {
+                    showToastMessenger('success', "Cập nhật thành công voucher khuyến mãi!");
                     formData.hide();
-                    voucherPage.loadListVoucher(inputSearch.value , this.isCanUse, this.index,this.count);
-                }).fail(err=>{
-                    showToastMessenger('danger',"Có lỗi vui lòng thử lại!")
+                    voucherPage.loadListVoucher(inputSearch.value, this.isCanUse, this.index, this.count);
+                }).fail(err => {
+                    showToastMessenger('danger', "Có lỗi vui lòng thử lại!")
                 })
             }
-        }else{
-            showToastMessenger("danger","Giá trị phần trăm | số tiền khuyến mãi chưa được điền!");
+        } else {
+            showToastMessenger("danger", "Giá trị phần trăm | số tiền khuyến mãi chưa được điền!");
         }
     }
 }
