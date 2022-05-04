@@ -45,38 +45,45 @@ class listColums {
             title : "Mã đơn hàng",
             width : "min-width: 200px;",
             style : "text-align: center;",
-            field: 'orderId'
+            field: 'orderCode'
         },
         {
             title : "Ngày đặt hàng",
             width : "min-width: 200px;",
             style : "text-align: center;",
-            field: 'orderDate'
+            field: 'createdAt'
         },
         {
             title : "Sản phẩm",
             width : "min-width: 600px;",
-            field: 'listItem',
+            field: 'items',
             format: 'listitem'
+        },
+        {
+            title : "Tổng tiền",
+            width : "min-width: 200px;",
+            style : "text-align: center;",
+            field: 'totalMoney',
         },
         {
             title : "Người đặt",
             width : "min-width: 200px;",
             style : "text-align: center;",
-            field: 'orderer',
             format: 'orderer'
         },
         {
             title : "Trạng thái đơn",
             width : "min-width: 200px;",
             style : "text-align: center;",
-            field: 'orderStatus'
+            field: 'status',
+            format: 'status'
         },
         {
             title : "Loại thanh toán",
             width : "min-width: 200px;",
             style : "text-align: center;",
-            field: 'paymentMethod'
+            field: 'paymentMethod',
+            format: 'paymentMethod'
         },
         {
             title : "Đã thanh toán",
@@ -84,6 +91,19 @@ class listColums {
             field: 'paymentStatus',
             style : "text-align: center;",
             format: 'boolean'
+        },
+        {
+            title : "Phí ship",
+            width : "min-width: 200px;",
+            field: 'shipPayStatus',
+            style : "text-align: center;",
+            format: 'boolean'
+        },
+        {
+            title : "Ghi chú",
+            width : "min-width: 200px;",
+            field: 'note',
+            style : "text-align: center;",
         }
     ];
 

@@ -25,10 +25,6 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-function getMediaUrl(fileName) {
-    return `https://firebasestorage.googleapis.com/v0/b/daustore.appspot.com/o/${fileName}.png?alt=media`;
-}
-
 
 itemPage = null;
 window.onload = () => {

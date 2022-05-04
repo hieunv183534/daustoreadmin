@@ -191,10 +191,13 @@ class BaseApi {
     }
 
     getOrders(orderStatus = null, searchTerms = null, startTime = null, endTime = null, orderTimeState = 1, index = 0, count = 50) {
-        let _orderStatus = (orderStatus == null) ? '' : `&orderStatus=${orderStatus}`;
-        let _searchTerms = (searchTerms == null) ? '' : `&searchTerms=${searchTerms}`;
-        let _startTime = (startTime == null) ? '' : `&startTime=${startTime}`;
-        let _endTime = (endTime == null) ? '' : `&endTime=${endTime}`;
+        startTime = !startTime ? null : Number(new Date(startTime)) / 1000;
+        endTime = !endTime ? null : Number(new Date(endTime)) / 1000;
+        let _orderStatus = (!orderStatus) ? '' : `&orderStatus=${orderStatus}`;
+        let _searchTerms = (!searchTerms) ? '' : `&searchTerms=${searchTerms}`;
+        let _startTime = (!startTime) ? '' : `&startTime=${startTime}`;
+        let _endTime = (!endTime) ? '' : `&endTime=${endTime}`;
+        console.log(_orderStatus, _searchTerms, _endTime, _startTime);
         return $.ajax({
             url: this.baseUrl + `getOrders?orderTimeState=${orderTimeState}&index=${index}&count=${count}${_orderStatus}${_searchTerms}${_startTime}${_endTime}`,
             method: 'GET',
@@ -212,7 +215,7 @@ class BaseApi {
         })
     }
 
-    updateOrderByAdmin(order,orderId) {
+    updateOrderByAdmin(order, orderId) {
         return $.ajax({
             url: this.baseUrl + `updateOrderByAdmin/${orderId}`,
             method: 'PUT',
@@ -223,7 +226,7 @@ class BaseApi {
         })
     }
 
-    updateOrderByCustomer(order,orderId) {
+    updateOrderByCustomer(order, orderId) {
         return $.ajax({
             url: this.baseUrl + `updateOrderByCustomer/${orderId}`,
             method: 'PUT',

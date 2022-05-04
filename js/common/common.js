@@ -5,7 +5,12 @@ function parseHTML(html) {
     return t.content.firstChild;
 }
 
+function getMediaUrl(fileName) {
+    return `https://firebasestorage.googleapis.com/v0/b/daustore.appspot.com/o/${fileName}.png?alt=media`;
+}
 
+var orderStatus = ['', 'Chờ duyệt', 'Đã xác nhận', 'Đang giao', 'Đã giao', 'Hủy bỏ', 'Hoàn trả'];
+var paymentMethod = ['', 'Tiền mặt', 'Momo', 'Bank', 'VNPay'];
 
 //-------------------combobox-------------------------------------------------------------------------------------------------
 var cbbs = document.querySelectorAll('.combobox .input');
@@ -140,17 +145,20 @@ function loadTable(columns, datas, startIndex) {
             } else if (col.format == 'date') {
                 value = formatDate(item[`${col.field}`]);
             } else if (col.format == "listitem") {
-                let listItem = item[`${col.field}`];
+                let listItem = item[`${col.field}`].split(' _and_ ');
                 value = parseHTML('<div class="list-item-order"></div>');
                 listItem.forEach(i => {
                     value.append(parseHTML(`<div class="item-order">
-                                                <img src="${i.imgUrl}" alt="" style="width: 80px;">
-                                                <span> <b>X${i.quantity}</b> ${i.name}</span>
+                                                <img src="${getMediaUrl(i.split('|')[3])}" alt="" style="width: 80px;">
+                                                <span> <b>X${i.split('|')[0]}</b> ${i.split('|')[4]}</span>
                                             </div>`));
                 })
             } else if (col.format == "orderer") {
-                let orderer = item[`${col.field}`];
-                value = `<b>${orderer.name}</b>,<br>${orderer.phone},<br>${orderer.address}`;
+                value = `<b>${item.buyerName}</b>,<br>${item.phone},<br>${item.address}`;
+            } else if (col.format == "status") {
+                value = `<b>${orderStatus[item.status]}</b>`;
+            } else if (col.format == "paymentMethod") {
+                value = `<b>${paymentMethod[item.paymentMethod]}</b>`;
             }
             else {
                 value = item[`${col.field}`];
@@ -284,42 +292,6 @@ function getBoolean(ele) {
     return value;
 }
 
-//---------------------------------------------------------------------------------------------------------------------
-//---------------post--------------------------------------------------------------------------------------------------
-function loadListPost(posts) {
-    var postList = document.querySelector(".post-list");
-    postList.innerHTML = "";
-    posts.forEach(post => {
-        var postEle = parseHTML(`<div class="post">
-        <div class="post-header">
-            <div class="left">
-                <p class="poster">${post.posterName}</p>
-                <p class="post-time">${Util.formatDateTime(post.timePost)}</p>
-            </div>
-            <div class="right">
-                <i class="fas fa-map-marker-alt"></i>
-                <div class="post-position">${post.unitDetail}</div>
-            </div>
-            
-        </div>
-        <div class="post-body">
-            <h2 class="post-title">${post.title}</h2>
-            <p class="post-content">${post.notificationContent}</p>
-        </div>
-    </div>`);
-
-        var postFooter = parseHTML(`<div class="post-footer">
-        <button class="button button-primary" id="btnUpdatePost">Chỉnh sửa</button>
-        <button class="button button-secondary" id="btnDeletePost">Xóa</button>
-        <button class="button button-primary" id="btnApprovePost">Duyệt</button>
-        <button class="button button-secondary" id="btnRefusePost">Từ chối</button>
-        </div>`);
-        postFooter.setAttribute('myPost', JSON.stringify(post));
-        postEle.append(postFooter);
-        postList.append(postEle);
-    });
-    hideLoader();
-}
 //---------------------------------------------------------------------------------------------------------------------
 //------------------dropdown-------------------------------------------------------------------------------------------
 var dropdownmains = document.querySelectorAll('.dropdown-main');
