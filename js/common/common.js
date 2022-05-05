@@ -437,14 +437,14 @@ function loadListCategory(listCategory) {
                                                                 <p>Tất cả sản phẩm</p>
                                                             </div>`));
 
-    // thêm thuộc tính: hasSimpleChild cho các category
-    for (i = 0; i < listCategory.length; i++) {
-        if ((listCategory[i].parentCode === '') && !listCategory[i].isExpandable) {
-            document.querySelector('#category').append(parseHTML(`<div class="tree-nav__item"></div>`));
-            break;
+    if(listCategory){
+        for (i = 0; i < listCategory.length; i++) {
+            if ((listCategory[i].parentCode === '') && !listCategory[i].isExpandable) {
+                document.querySelector('#category').append(parseHTML(`<div class="tree-nav__item"></div>`));
+                break;
+            }
         }
     }
-
 
     // ý tưởng: duyệt qua hết categorys. Nếu gặp isExpandable thì tạo thẻ expandable , nếu hasSimpleChild thì tạo luôn div để chứa các con simple sau đó append vào cha
     // Nếu gặp isExpandable là false thì append vào div chứa con của cha
@@ -478,11 +478,13 @@ function loadListCategoryx(listCategory) {
                                                                 <p>Tất cả sản phẩm</p>
                                                             </div>`));
 
-    // thêm thuộc tính: hasSimpleChild cho các category
-    for (i = 0; i < listCategory.length; i++) {
-        if ((listCategory[i].parentCode === '') && !listCategory[i].isExpandable) {
-            document.querySelector('#categoryx').append(parseHTML(`<div class="tree-nav__item"></div>`));
-            break;
+    
+    if(listCategory){
+        for (i = 0; i < listCategory.length; i++) {
+            if ((listCategory[i].parentCode === '') && !listCategory[i].isExpandable) {
+                document.querySelector('#categoryx').append(parseHTML(`<div class="tree-nav__item"></div>`));
+                break;
+            }
         }
     }
 
@@ -527,13 +529,16 @@ function loadListCategoryForm(listCategory) {
                                                                     </div>
                                                                 </div>`));
 
-    // thêm thuộc tính: hasSimpleChild cho các category
-    for (i = 0; i < listCategory.length; i++) {
-        if ((listCategory[i].parentCode === '') && !listCategory[i].isExpandable) {
-            document.querySelector('#category_form').append(parseHTML(`<div class="tree-nav__item"></div>`));
-            break;
+    
+    if(listCategory){
+        for (i = 0; i < listCategory.length; i++) {
+            if ((listCategory[i].parentCode === '') && !listCategory[i].isExpandable) {
+                document.querySelector('#category_form').append(parseHTML(`<div class="tree-nav__item"></div>`));
+                break;
+            }
         }
     }
+    
     // ý tưởng: duyệt qua hết categorys. Nếu gặp isExpandable thì tạo thẻ expandable , nếu hasSimpleChild thì tạo luôn div để chứa các con simple sau đó append vào cha
     // Nếu gặp isExpandable là false thì append vào div chứa con của cha
     listCategory.forEach(category => {
