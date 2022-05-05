@@ -351,20 +351,20 @@ function initEventCheckbox() {
 
 }
 
-function getValueCheckBox(selector){
+function getValueCheckBox(selector) {
     let checkbox = document.querySelector(selector);
-    if(Number(checkbox.getAttribute('value')) == 1 ){
+    if (Number(checkbox.getAttribute('value')) == 1) {
         return true;
-    }else{
+    } else {
         return false;
     }
 }
 
-function setValueCheckbox(selector, value){
+function setValueCheckbox(selector, value) {
     let checkbox = document.querySelector(selector);
-    if(value){
+    if (value) {
         checkbox.setAttribute("value", 1);
-    }else{
+    } else {
         checkbox.setAttribute("value", 0);
     }
 }
@@ -437,29 +437,28 @@ function loadListCategory(listCategory) {
                                                                 <p>Tất cả sản phẩm</p>
                                                             </div>`));
 
-    if(listCategory){
+    if (listCategory) {
         for (i = 0; i < listCategory.length; i++) {
             if ((listCategory[i].parentCode === '') && !listCategory[i].isExpandable) {
                 document.querySelector('#category').append(parseHTML(`<div class="tree-nav__item"></div>`));
                 break;
             }
-        }
-    }
+        };
 
-    // ý tưởng: duyệt qua hết categorys. Nếu gặp isExpandable thì tạo thẻ expandable , nếu hasSimpleChild thì tạo luôn div để chứa các con simple sau đó append vào cha
-    // Nếu gặp isExpandable là false thì append vào div chứa con của cha
-    listCategory.forEach(category => {
-        let parentElement = document.querySelector(`#category${category.parentCode}`);
+        // ý tưởng: duyệt qua hết categorys. Nếu gặp isExpandable thì tạo thẻ expandable , nếu hasSimpleChild thì tạo luôn div để chứa các con simple sau đó append vào cha
+        // Nếu gặp isExpandable là false thì append vào div chứa con của cha
+        listCategory.forEach(category => {
+            let parentElement = document.querySelector(`#category${category.parentCode}`);
 
-        if (!category.isExpandable) {
-            let str = `<div class="tree-nav__item-title" id="category${category.categoryCode}" code="${category.categoryCode}" name="${category.categoryName}">
+            if (!category.isExpandable) {
+                let str = `<div class="tree-nav__item-title" id="category${category.categoryCode}" code="${category.categoryCode}" name="${category.categoryName}">
                             <p>${category.categoryName}</p>
                         </div>`;
-            let categoryElement = parseHTML(str);
-            if (parentElement.querySelector('.tree-nav__item'))
-                parentElement.querySelector('.tree-nav__item').append(categoryElement);
-        } else {
-            let str = `<details class="tree-nav__item is-expandable" id="category${category.categoryCode}">
+                let categoryElement = parseHTML(str);
+                if (parentElement.querySelector('.tree-nav__item'))
+                    parentElement.querySelector('.tree-nav__item').append(categoryElement);
+            } else {
+                let str = `<details class="tree-nav__item is-expandable" id="category${category.categoryCode}">
                             <summary class="tree-nav__item-title">${category.categoryName}</summary>
                             <div class="tree-nav__item">
                                 <div class="tree-nav__item-title" code="${category.categoryCode}"  name="${category.categoryName}">
@@ -467,10 +466,13 @@ function loadListCategory(listCategory) {
                                 </div>
                             </div>
                         </details>`;
-            let categoryElement = parseHTML(str);
-            parentElement.append(categoryElement);
-        }
-    });
+                let categoryElement = parseHTML(str);
+                parentElement.append(categoryElement);
+            }
+        });
+    }
+
+
 };
 
 function loadListCategoryx(listCategory) {
@@ -478,31 +480,29 @@ function loadListCategoryx(listCategory) {
                                                                 <p>Tất cả sản phẩm</p>
                                                             </div>`));
 
-    
-    if(listCategory){
+
+    if (listCategory) {
         for (i = 0; i < listCategory.length; i++) {
             if ((listCategory[i].parentCode === '') && !listCategory[i].isExpandable) {
                 document.querySelector('#categoryx').append(parseHTML(`<div class="tree-nav__item"></div>`));
                 break;
             }
         }
-    }
 
+        // ý tưởng: duyệt qua hết categorys. Nếu gặp isExpandable thì tạo thẻ expandable , nếu hasSimpleChild thì tạo luôn div để chứa các con simple sau đó append vào cha
+        // Nếu gặp isExpandable là false thì append vào div chứa con của cha
+        listCategory.forEach(category => {
+            let parentElement = document.querySelector(`#categoryx${category.parentCode}`);
 
-    // ý tưởng: duyệt qua hết categorys. Nếu gặp isExpandable thì tạo thẻ expandable , nếu hasSimpleChild thì tạo luôn div để chứa các con simple sau đó append vào cha
-    // Nếu gặp isExpandable là false thì append vào div chứa con của cha
-    listCategory.forEach(category => {
-        let parentElement = document.querySelector(`#categoryx${category.parentCode}`);
-
-        if (!category.isExpandable) {
-            let str = `<div class="tree-nav__item-title" id="categoryx${category.categoryCode}" code="${category.categoryCode}" name="${category.categoryName}">
+            if (!category.isExpandable) {
+                let str = `<div class="tree-nav__item-title" id="categoryx${category.categoryCode}" code="${category.categoryCode}" name="${category.categoryName}">
                             <p>${category.categoryName}</p>
                         </div>`;
-            let categoryElement = parseHTML(str);
-            if (parentElement.querySelector('.tree-nav__item'))
-                parentElement.querySelector('.tree-nav__item').append(categoryElement);
-        } else {
-            let str = `<details class="tree-nav__item is-expandable" id="categoryx${category.categoryCode}">
+                let categoryElement = parseHTML(str);
+                if (parentElement.querySelector('.tree-nav__item'))
+                    parentElement.querySelector('.tree-nav__item').append(categoryElement);
+            } else {
+                let str = `<details class="tree-nav__item is-expandable" id="categoryx${category.categoryCode}">
                             <summary class="tree-nav__item-title">${category.categoryName}</summary>
                             <div class="tree-nav__item">
                                 <div class="tree-nav__item-title" code="${category.categoryCode}" name="${category.categoryName}">
@@ -510,10 +510,12 @@ function loadListCategoryx(listCategory) {
                                 </div>
                             </div>
                         </details>`;
-            let categoryElement = parseHTML(str);
-            parentElement.append(categoryElement);
-        }
-    });
+                let categoryElement = parseHTML(str);
+                parentElement.append(categoryElement);
+            }
+        });
+    }
+
 };
 
 function loadListCategoryForm(listCategory) {
@@ -529,31 +531,30 @@ function loadListCategoryForm(listCategory) {
                                                                     </div>
                                                                 </div>`));
 
-    
-    if(listCategory){
+
+    if (listCategory) {
         for (i = 0; i < listCategory.length; i++) {
             if ((listCategory[i].parentCode === '') && !listCategory[i].isExpandable) {
                 document.querySelector('#category_form').append(parseHTML(`<div class="tree-nav__item"></div>`));
                 break;
             }
         }
-    }
-    
-    // ý tưởng: duyệt qua hết categorys. Nếu gặp isExpandable thì tạo thẻ expandable , nếu hasSimpleChild thì tạo luôn div để chứa các con simple sau đó append vào cha
-    // Nếu gặp isExpandable là false thì append vào div chứa con của cha
-    listCategory.forEach(category => {
-        let parentElement = document.querySelector(`#category_form${category.parentCode}`);
 
-        if (!category.isExpandable) {
-            let str = `<div class="tree-nav__item-title" id="category_form${category.categoryCode}" code="${category.categoryCode}" categoryId=${category.categoryId} name="${category.categoryName}">
+        // ý tưởng: duyệt qua hết categorys. Nếu gặp isExpandable thì tạo thẻ expandable , nếu hasSimpleChild thì tạo luôn div để chứa các con simple sau đó append vào cha
+        // Nếu gặp isExpandable là false thì append vào div chứa con của cha
+        listCategory.forEach(category => {
+            let parentElement = document.querySelector(`#category_form${category.parentCode}`);
+
+            if (!category.isExpandable) {
+                let str = `<div class="tree-nav__item-title" id="category_form${category.categoryCode}" code="${category.categoryCode}" categoryId=${category.categoryId} name="${category.categoryName}">
                             <p>${category.categoryName}</p>
                             ${toolStr}
                         </div>`;
-            let categoryElement = parseHTML(str);
-            if (parentElement.querySelector('.tree-nav__item'))
-                parentElement.querySelector('.tree-nav__item').append(categoryElement);
-        } else {
-            let str = `<details class="tree-nav__item is-expandable" id="category_form${category.categoryCode}">
+                let categoryElement = parseHTML(str);
+                if (parentElement.querySelector('.tree-nav__item'))
+                    parentElement.querySelector('.tree-nav__item').append(categoryElement);
+            } else {
+                let str = `<details class="tree-nav__item is-expandable" id="category_form${category.categoryCode}">
                             <summary class="tree-nav__item-title">${category.categoryName}</summary>
                             <div class="tree-nav__item">
                                 <div class="tree-nav__item-title" code="${category.categoryCode}" categoryId=${category.categoryId} name="${category.categoryName}">
@@ -562,8 +563,9 @@ function loadListCategoryForm(listCategory) {
                                 </div>
                             </div>
                         </details>`;
-            let categoryElement = parseHTML(str);
-            parentElement.append(categoryElement);
-        }
-    });
+                let categoryElement = parseHTML(str);
+                parentElement.append(categoryElement);
+            }
+        });
+    }
 };
