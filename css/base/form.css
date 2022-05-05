@@ -211,3 +211,54 @@
     border: 1px solid red !important;
 }
 
+.form .list-item-order{
+    max-height: 235px !important;
+}
+
+.form .textarea-wrapper{
+    height: 235px !important;
+}
+
+.order-status-input{
+    width: 100%;
+    height: 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order-status-input p{
+    font-size: 16px;
+}
+
+.change-status{
+    height: 100%;
+    width: 36px;
+    background-color: #fff;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid #bbb;
+}
+
+.change-status:hover{
+    background-color: #ccc;
+}
+
+.pay-info{
+    width: 100%;
+    height: 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    padding: 0px 15px;
+}
+
+.pay-info .checkbox{
+    margin-left: 10px;
+}
+

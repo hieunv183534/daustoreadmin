@@ -351,6 +351,24 @@ function initEventCheckbox() {
 
 }
 
+function getValueCheckBox(selector){
+    let checkbox = document.querySelector(selector);
+    if(Number(checkbox.getAttribute('value')) == 1 ){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function setValueCheckbox(selector, value){
+    let checkbox = document.querySelector(selector);
+    if(value){
+        checkbox.setAttribute("value", 1);
+    }else{
+        checkbox.setAttribute("value", 0);
+    }
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 //-----------------PopupDialog-----------------------------------------------------------------------------------------
 function showPopupDialog(title, content, buttons) {

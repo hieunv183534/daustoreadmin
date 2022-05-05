@@ -31,8 +31,7 @@
                 <i class="fa-solid fa-truck-fast"></i>
                 <p>Quản lí đơn</p>
             </div>
-            <div id="cilivianSituation" class="menu-item" toHref="voucher"
-                title="Quản lí các mã khuyến mãi">
+            <div id="cilivianSituation" class="menu-item" toHref="voucher" title="Quản lí các mã khuyến mãi">
                 <i class="fa-solid fa-gift"></i>
                 <p>Mã khuyến mãi</p>
             </div>
@@ -45,7 +44,8 @@
         <div class="content-header">
             <div class="content-header-left">
                 <i class="fas fa-user-cog"></i>
-                <h2>|</h2><h4 id="livetime"></h4>
+                <h2>|</h2>
+                <h4 id="livetime"></h4>
             </div>
             <div class="content-header-right">
                 <div class="notification">
@@ -67,44 +67,37 @@
         <div class="content-body">
             <div class="function-bar">
                 <span>
-                    <div class="dropdown" style="border:none; width: 160px;">
+                    <div class="dropdown" id="inputOrderStatus" style="border:none; width: 160px;">
                         <button class="dropdown-main">
                             <p>Tất cả trạng thái</p>
                             <div class="icon"><i class="fas fa-chevron-down"></i></div>
                         </button>
                         <div class="dropdown-data">
-                            <div class="dropdown-item item-selected"
-                                valuename="Tất cả trạng thái">
+                            <div class="dropdown-item item-selected" valuename="Tất cả trạng thái" value="0">
                                 <i class="fas fa-check"></i>
                                 <p>Tất cả trạng thái</p>
                             </div>
-                            <div class="dropdown-item"
-                                valuename="Chờ duyệt">
+                            <div class="dropdown-item" valuename="Chờ duyệt" value="1">
                                 <i class="fas fa-check"></i>
                                 <p>Chờ duyệt</p>
                             </div>
-                            <div class="dropdown-item"
-                                valuename="Đã xác nhận">
+                            <div class="dropdown-item" valuename="Đã xác nhận" value="2">
                                 <i class="fas fa-check"></i>
                                 <p>Đã xác nhận</p>
                             </div>
-                            <div class="dropdown-item"
-                                valuename="Đang giao">
+                            <div class="dropdown-item" valuename="Đang giao" value="3">
                                 <i class="fas fa-check"></i>
                                 <p>Đang giao</p>
                             </div>
-                            <div class="dropdown-item"
-                                valuename="Đã giao">
+                            <div class="dropdown-item" valuename="Đã giao" value="4">
                                 <i class="fas fa-check"></i>
                                 <p>Đã giao</p>
                             </div>
-                            <div class="dropdown-item"
-                                valuename="Đã hủy">
+                            <div class="dropdown-item" valuename="Đã hủy" value="5">
                                 <i class="fas fa-check"></i>
                                 <p>Đã hủy</p>
                             </div>
-                            <div class="dropdown-item"
-                                valuename="Hoàn trả">
+                            <div class="dropdown-item" valuename="Hoàn trả" value="6">
                                 <i class="fas fa-check"></i>
                                 <p>Hoàn trả</p>
                             </div>
@@ -116,25 +109,24 @@
                     <input type="datetime-local" class="input" id="inputEndTime" style="width:190px">
                 </span>
                 <span>
-                    <div class="dropdown" style="border:none; width: 150px;">
+                    <div class="dropdown" id="inputOrderTimeState" style="border:none; width: 150px;">
                         <button class="dropdown-main">
                             <p>Mới đến cũ</p>
                             <div class="icon"><i class="fas fa-chevron-down"></i></div>
                         </button>
                         <div class="dropdown-data">
-                            <div class="dropdown-item item-selected"
-                                valuename="Mới đến cũ">
+                            <div class="dropdown-item item-selected" valuename="Mới đến cũ" value="1">
                                 <i class="fas fa-check"></i>
                                 <p>Mới đến cũ</p>
                             </div>
-                            <div class="dropdown-item"
-                                valuename="Cũ đến mới">
+                            <div class="dropdown-item" valuename="Cũ đến mới" value="0">
                                 <i class="fas fa-check"></i>
                                 <p>Cũ đến mới</p>
                             </div>
                         </div>
                     </div>
-                    <input type="text" class="input search-box" id="inputSearch" placeholder="Tìm theo mã đơn, số điện thoại">
+                    <input type="text" class="input search-box" id="inputSearch"
+                        placeholder="Tìm theo mã đơn, số điện thoại">
                     <button class="button button-secondary button-icon" id="btnRefresh">
                         <i class="fas fa-sync-alt"></i>
                     </button>
@@ -154,25 +146,25 @@
                         <div class="paging-bar-right">
                             <div class="dropdown last-dropdown" style="border:none;">
                                 <button class="dropdown-main">
-                                    <p>100</p>
+                                    <p>10</p>
                                     <div class="icon"><i class="fas fa-chevron-down"></i></div>
                                 </button>
                                 <div class="dropdown-data">
-                                    <div class="dropdown-item" valuename="200">
+                                    <div class="dropdown-item" valuename="10">
                                         <i class="fas fa-check"></i>
-                                        <p>200</p>
+                                        <p>10</p>
                                     </div>
-                                    <div class="dropdown-item item-selected" valuename="100">
+                                    <div class="dropdown-item item-selected" valuename="5">
                                         <i class="fas fa-check"></i>
-                                        <p>100</p>
+                                        <p>5</p>
                                     </div>
-                                    <div class="dropdown-item" valuename="50">
+                                    <div class="dropdown-item" valuename="2">
                                         <i class="fas fa-check"></i>
-                                        <p>50</p>
+                                        <p>2</p>
                                     </div>
-                                    <div class="dropdown-item" valuename="20">
+                                    <div class="dropdown-item" valuename="1">
                                         <i class="fas fa-check"></i>
-                                        <p>20</p>
+                                        <p>1</p>
                                     </div>
                                 </div>
                             </div>
@@ -187,6 +179,88 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-data">
+        <div class="form">
+            <div class="form-header">
+                <div class="form-title">
+                    <h2>Thông tin đơn hàng</h2>
+                </div>
+                <div class="close-from" id="closeFormData"> <i class="fas fa-times"></i> </div>
+            </div>
+            <div class="form-body">
+                <div class="row">
+                    <div class="form-item divide-3-row">
+                        <div class="item-title">Mã đơn hàng:</div>
+                        <input type="text" class="input" id="valueOrderCode" disabled>
+                    </div>
+                    <div class="form-item divide-3-row">
+                        <div class="item-title">Thời gian đặt:</div>
+                        <input type="datetime-local" class="input" id="valueOrderTime" disabled>
+                    </div>
+                    <div class="form-item divide-3-row">
+                        <div class="item-title">Trạng thái đơn:</div>
+                        <div class="order-status-input" id="valueStatus" value="1">
+                            <div class="change-status" value="-1">
+                                <div class="fas fa-angle-left"></div>
+                            </div>
+                            <p>Chờ duyệt</p>
+                            <div class="change-status" value="1">
+                                <div class="fas fa-angle-right"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-item divide-3-row">
+                        <div class="item-title">Phương thức thanh toán:</div>
+                        <div class="pay-info">
+                            <p id="valuePaymentMethod">Tiền mặt</p>
+                            <span style="display: flex;">
+                                <b>Paid:</b>
+                                <div class="checkbox" id="valuePaymentStatus" value="0">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-item divide-3-row">
+                        <div class="item-title">Phí ship: </div>
+                        <div class="pay-info">
+                            <p>20-40k</p>
+                            <span style="display: flex;">
+                                <b>Paid:</b>
+                                <div class="checkbox" id="valueShipPayStatus" value="0">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-item divide-3-row">
+                        <div class="item-title">Tổng tiền:</div>
+                        <input type="number" class="input" id="valueTotalMoney" disabled>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-item divide-2-row">
+                        <div class="item-title">Thông tin người đặt và ghi chú: </div>
+                        <div class="textarea-wrapper">
+                            <textarea id="valueBuyerInfo" disabled></textarea>
+                        </div>
+                    </div>
+                    <div class="form-item divide-2-row">
+                        <div class="item-title">Danh sách hàng: </div>
+                        <div class="list-item-order" id="valueItems">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-footer">
+                <button class="button button-primary" id="btnUpdateOrder">Cập nhật thông tin</button>
             </div>
         </div>
     </div>
