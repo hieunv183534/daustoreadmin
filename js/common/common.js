@@ -476,11 +476,6 @@ function loadListCategory(listCategory) {
 };
 
 function loadListCategoryx(listCategory) {
-    document.querySelector('#categoryx').append(parseHTML(`<div class="tree-nav__item-title" code="" name="Tất cả sản phẩm">
-                                                                <p>Tất cả sản phẩm</p>
-                                                            </div>`));
-
-
     if (listCategory) {
         for (i = 0; i < listCategory.length; i++) {
             if ((listCategory[i].parentCode === '') && !listCategory[i].isExpandable) {
@@ -495,7 +490,7 @@ function loadListCategoryx(listCategory) {
             let parentElement = document.querySelector(`#categoryx${category.parentCode}`);
 
             if (!category.isExpandable) {
-                let str = `<div class="tree-nav__item-title" id="categoryx${category.categoryCode}" code="${category.categoryCode}" name="${category.categoryName}">
+                let str = `<div class="tree-nav__item-title" id="categoryx${category.categoryCode}" code="${category.categoryCode}" name="${category.categoryName}" categoryListDescription="${category.categoryListDescription.join('XXX')}">
                             <p>${category.categoryName}</p>
                         </div>`;
                 let categoryElement = parseHTML(str);
@@ -505,7 +500,7 @@ function loadListCategoryx(listCategory) {
                 let str = `<details class="tree-nav__item is-expandable" id="categoryx${category.categoryCode}">
                             <summary class="tree-nav__item-title">${category.categoryName}</summary>
                             <div class="tree-nav__item">
-                                <div class="tree-nav__item-title" code="${category.categoryCode}" name="${category.categoryName}">
+                                <div class="tree-nav__item-title" code="${category.categoryCode}" name="${category.categoryName}" categoryListDescription="${category.categoryListDescription.join('XXX')}">
                                     <p>Tất cả</p>
                                 </div>
                             </div>
@@ -524,7 +519,7 @@ function loadListCategoryForm(listCategory) {
                         <div class="tool-option edit"><i class="fa-solid fa-pen-clip"></i></div>
                         <div class="tool-option delete"><i class="fa-solid fa-minus"></i></div>
                     </div>`;
-    document.querySelector('#category_form').append(parseHTML(`<div class="tree-nav__item-title"  code="">
+    document.querySelector('#category_form').append(parseHTML(`<div class="tree-nav__item-title"  code="" name="Tất cả sản phẩm" categoryListDescription="[]">
                                                                     <p>Tất cả sản phẩm</p>
                                                                     <div class="tool">
                                                                         <div class="tool-option add"><i class="fa-solid fa-plus"></i></div>
@@ -546,7 +541,7 @@ function loadListCategoryForm(listCategory) {
             let parentElement = document.querySelector(`#category_form${category.parentCode}`);
 
             if (!category.isExpandable) {
-                let str = `<div class="tree-nav__item-title" id="category_form${category.categoryCode}" code="${category.categoryCode}" categoryId=${category.categoryId} name="${category.categoryName}">
+                let str = `<div class="tree-nav__item-title" id="category_form${category.categoryCode}" code="${category.categoryCode}" categoryId=${category.categoryId} name="${category.categoryName}" categoryListDescription="${category.categoryListDescription.join('XXX')}">
                             <p>${category.categoryName}</p>
                             ${toolStr}
                         </div>`;
@@ -557,7 +552,7 @@ function loadListCategoryForm(listCategory) {
                 let str = `<details class="tree-nav__item is-expandable" id="category_form${category.categoryCode}">
                             <summary class="tree-nav__item-title">${category.categoryName}</summary>
                             <div class="tree-nav__item">
-                                <div class="tree-nav__item-title" code="${category.categoryCode}" categoryId=${category.categoryId} name="${category.categoryName}">
+                                <div class="tree-nav__item-title" code="${category.categoryCode}" categoryId=${category.categoryId} name="${category.categoryName}" categoryListDescription="${category.categoryListDescription.join('XXX')}">
                                     <p>Tất cả</p>
                                     ${toolStr}
                                 </div>

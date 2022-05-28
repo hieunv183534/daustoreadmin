@@ -74,11 +74,12 @@ class BaseApi {
         })
     }
 
-    updateCategory(categoryId, newName) {
+    updateCategory(categoryId, newName, listDescription) {
         return $.ajax({
-            url: this.baseUrl + `updateCategory/${categoryId}/${newName}`,
+            url: this.baseUrl + `updateCategory/${categoryId}`,
             method: 'PUT',
             headers: { "Authorization": this.accessToken },
+            data: JSON.stringify({categoryName: newName, categoryListDescription: listDescription}),
             dataType: 'json',
             contentType: 'application/json'
         })

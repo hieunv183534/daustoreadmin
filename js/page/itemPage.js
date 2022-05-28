@@ -11,6 +11,8 @@ btnUpdateCategory = document.querySelector('#btnUpdateCategory');
 btnUploadMedia = document.querySelector('#btnUploadMedia');
 inputMedia = document.querySelector('#inputMedia');
 listMedia = document.querySelector('.list-media');
+listDesctiptionCategory = document.querySelector('.list-category-description .my-list');
+listDescriptionFeatureForm = document.querySelector('.list-description-feature');
 
 
 var firebaseConfig = {
@@ -36,7 +38,6 @@ window.onload = () => {
             Validator.isRequired('#valueItemName'),
             Validator.isRequired('#valueRealPrice'),
             Validator.isRequired('#valueSaleRate'),
-            Validator.isRequired('#valueDescription'),
             Validator.isRequired('#valueMedias'),
         ],
         submitSelector: '#btnUpdateUserInfo',
@@ -87,16 +88,15 @@ class ItemPage extends Base {
             document.querySelector('#valueItemCode').value = '';
             document.querySelector('#valueRealPrice').value = '';
             document.querySelector('#valueSaleRate').value = '';
-            document.querySelector('#valueCategoryCode .category-main').innerHTML = 'Tất cả sản phẩm';
+            document.querySelector('#valueCategoryCode .category-main').innerHTML = 'Vui lòng chọn danh mục';
             document.querySelector('#valueCategoryCode').setAttribute('value', '');
-            document.querySelector('#valueDescription').value = "";
             document.querySelector('#valueMedias').setAttribute('value', "");
             listMedia.innerHTML = '';
             document.querySelector('#valueTag').setAttribute('value', "");
             this.setValueTag('');
 
             // đưa form về dạng chưa cảnh báo
-            let listValueSelector = ['#valueItemName', '#valueRealPrice', '#valueSaleRate', '#valueDescription', '#valueMedias'];
+            let listValueSelector = ['#valueItemName', '#valueRealPrice', '#valueSaleRate', '#valueMedias'];
             listValueSelector.forEach(selector => {
                 let element = document.querySelector(selector);
                 element.classList.remove('validate-field');
@@ -150,7 +150,8 @@ class ItemPage extends Base {
                     btns[1].addEventListener('click', () => {
                         this.API.addCategory({
                             categoryName: this.formCategory.categoryName,
-                            parentCode: (this.formCategory.categoryCode === '') ? 'xxx' : this.formCategory.categoryCode
+                            parentCode: (this.formCategory.categoryCode === '') ? 'xxx' : this.formCategory.categoryCode,
+                            categoryListDescription: this.getListDescriptionCategory()
                         }).done(res => {
                             showToastMessenger('success', "Thêm mới thành công một danh mục!");
                             hidePopupDialog();
@@ -166,7 +167,7 @@ class ItemPage extends Base {
                         hidePopupDialog();
                     });
                     btns[1].addEventListener('click', () => {
-                        this.API.updateCategory(this.formCategory.categoryId, this.formCategory.categoryName).done(res => {
+                        this.API.updateCategory(this.formCategory.categoryId, this.formCategory.categoryName, this.getListDescriptionCategory()).done(res => {
                             showToastMessenger('success', "Chỉnh sửa thành công danh mục!");
                             hidePopupDialog();
                             this.renderTreeList();
@@ -214,7 +215,17 @@ class ItemPage extends Base {
             } else {
                 showToastMessenger('danger', "Vui lòng chọn file từ máy trước!")
             }
-        })
+        });
+
+        document.querySelector('.mybtn.add-description').addEventListener('click', () => {
+            let newItem = parseHTML(`<div class="category-description-item">
+                                        <input type="text" value="">
+                                        <div class="mybtn remove-description"><i class="fas fa-minus"></i></div>
+                                    </div>`);
+            listDesctiptionCategory.append(newItem);
+            newItem.querySelector('input').focus();
+            this.initEventListDescription();
+        });
     }
 
     initEventMedia() {
@@ -303,6 +314,7 @@ class ItemPage extends Base {
             loadListCategoryx(res.data);
             loadListCategoryForm(res.data);
             this.initEventTreeList();
+            localStorage.setItem('category', JSON.stringify(res.data));
         }).fail(err => {
             showToastMessenger('danger', "Có lỗi");
         });
@@ -327,7 +339,10 @@ class ItemPage extends Base {
             document.querySelector('#valueSaleRate').value = item.saleRate;
             document.querySelector('#valueCategoryCode .category-main').innerHTML = item.categoryName;
             document.querySelector('#valueCategoryCode').setAttribute('value', item.categoryCode);
-            document.querySelector('#valueDescription').value = item.description;
+
+            let thisItemCategory = JSON.parse(localStorage.getItem('category')).find(cate => cate.categoryCode === item.categoryCode);
+            this.loadListDescriptionFeatureForm(thisItemCategory.categoryListDescription, item.listDescription);
+
             document.querySelector('#valueMedias').setAttribute('value', item.medias);
             this.loadListMedia(item.medias);
             document.querySelector('#valueTag').setAttribute('value', item.tag);
@@ -369,12 +384,12 @@ class ItemPage extends Base {
         }
     }
 
-    setValueTag(tag){
+    setValueTag(tag) {
         console.log(tag);
-        document.querySelectorAll('.tag-item').forEach(tagItem=>{
-            if(tag.includes(tagItem.getAttribute('data'))){
+        document.querySelectorAll('.tag-item').forEach(tagItem => {
+            if (tag.includes(tagItem.getAttribute('data'))) {
                 tagItem.classList.add('checked');
-            }else{
+            } else {
                 tagItem.classList.remove('checked');
             }
         });
@@ -401,11 +416,11 @@ class ItemPage extends Base {
             element.addEventListener('click', () => {
                 document.querySelector('#valueCategoryCode').setAttribute('value', element.getAttribute('code'));
                 document.querySelector('#valueCategoryCode .category-main').innerHTML = element.getAttribute('name');
-
+                let listFeature = element.getAttribute('categoryListDescription').split('XXX');
+                this.loadListDescriptionFeatureForm(listFeature, null);
                 document.querySelectorAll('.form-data div.tree-nav__item-title').forEach(e => {
                     e.classList.remove('active');
                 })
-
                 element.classList.add('active');
             });
         });
@@ -413,10 +428,15 @@ class ItemPage extends Base {
         document.querySelectorAll('.tool-option.add').forEach(element => {
             element.addEventListener('click', () => {
                 let value = element.parentElement.parentElement.getAttribute('code');
+                let parentName = element.parentElement.parentElement.getAttribute('name');
+                let listDescription = element.parentElement.parentElement.getAttribute('categoryListDescription').split('XXX');
                 console.log(value);
                 this.formCategoryMode = 'add';
                 this.formCategory.categoryCode = value;
+                document.querySelector('#valueCategoryName').value = '';
                 document.querySelector('#valueCategoryName').focus();
+                document.querySelector('#valueCategoryParent').value = parentName;
+                this.loadCategoryListDescription(listDescription);
             })
         });
 
@@ -424,9 +444,12 @@ class ItemPage extends Base {
             element.addEventListener('click', () => {
                 this.formCategory.categoryCode = element.parentElement.parentElement.getAttribute('code');
                 this.formCategory.categoryId = element.parentElement.parentElement.getAttribute('categoryId');
+                let listDescription = element.parentElement.parentElement.getAttribute('categoryListDescription').split('XXX');
                 this.formCategoryMode = 'edit';
                 document.querySelector('#valueCategoryName').value = element.parentElement.parentElement.getAttribute('name');
                 document.querySelector('#valueCategoryName').focus();
+                document.querySelector('#valueCategoryParent').value = "";
+                this.loadCategoryListDescription(listDescription);
             })
         });
 
@@ -459,8 +482,8 @@ class ItemPage extends Base {
         itemPage.formItem.saleRate = Number(document.querySelector('#valueSaleRate').value);
         itemPage.formItem.tag = document.querySelector('#valueTag').getAttribute('value');
         itemPage.formItem.categoryCode = document.querySelector('#valueCategoryCode').getAttribute('value');
-        itemPage.formItem.description = document.querySelector('#valueDescription').value;
         itemPage.formItem.medias = document.querySelector('#valueMedias').getAttribute('value');
+        itemPage.formItem.listDescription = itemPage.getListDescriptionFeature();
 
         console.log(itemPage.formItem);
 
@@ -474,13 +497,84 @@ class ItemPage extends Base {
                 showToastMessenger('danger', "Có lỗi, vui lòng thử lại!");
             });
         } else {
-            itemPage.API.updateItem(itemPage.formItem,itemPage.formItem.itemId).done(res=>{
+            itemPage.API.updateItem(itemPage.formItem, itemPage.formItem.itemId).done(res => {
                 showToastMessenger('success', "Cập nhật mặt hàng thành công!");
                 formData.hide();
                 itemPage.loadListItem(inputSearch.value, itemPage.categoryCode, itemPage.index, itemPage.count);
-            }).fail(err=>{
+            }).fail(err => {
                 showToastMessenger('danger', "Có lỗi, vui lòng thử lại!");
             })
         }
+    }
+
+    loadCategoryListDescription(categoryListDescription) {
+        listDesctiptionCategory.innerHTML = '';
+        categoryListDescription.forEach(i => {
+            var itemDescription = parseHTML(
+                `<div class="category-description-item">
+                        <input type="text" value="${i}">
+                        <div class="mybtn remove-description"><i class="fas fa-minus"></i></div>
+                </div>`);
+            listDesctiptionCategory.append(itemDescription);
+        });
+        this.initEventListDescription();
+    }
+
+    initEventListDescription() {
+        document.querySelectorAll('.mybtn.remove-description').forEach(element => {
+            element.addEventListener('click', () => {
+                element.parentElement.remove();
+            });
+        });
+
+        document.querySelectorAll('.category-description-item input').forEach(input => {
+            input.addEventListener("keyup", function (event) {
+                if (event.keyCode === 13) {
+                    event.preventDefault();
+                    document.querySelector('.mybtn.add-description').click();
+                }
+            });
+        });
+
+    };
+
+    getListDescriptionCategory() {
+        let listDes = [];
+        listDesctiptionCategory.querySelectorAll('.category-description-item input').forEach(input => {
+            if (input.value.trim())
+                listDes.push(input.value.trim());
+        });
+        return listDes;
+    }
+
+    loadListDescriptionFeatureForm(listFeature, listFeatureValue) {
+        listDescriptionFeatureForm.innerHTML = '';
+        if (listFeatureValue) {
+            for (let i = 0; i < listFeature.length; i++) {
+                let featureInput = parseHTML(`<div class="form-item divide-1-row">
+                                            <div>${listFeature[i]}: </div>
+                                            <input type="text" class="input" value="${listFeatureValue[i]}">
+                                        </div>`);
+                listDescriptionFeatureForm.append(featureInput);
+            }
+        } else {
+            listFeature.forEach(feature => {
+                let featureInput = parseHTML(`<div class="form-item divide-1-row">
+                                            <div>${feature}: </div>
+                                            <input type="text" class="input" value="">
+                                        </div>`);
+                listDescriptionFeatureForm.append(featureInput);
+            });
+        }
+    }
+
+    getListDescriptionFeature() {
+        let listFeature = [];
+        document.querySelectorAll('.list-description-feature input').forEach(input => {
+            if (input.value.trim()) {
+                listFeature.push(input.value.trim());
+            }
+        });
+        return listFeature;
     }
 }

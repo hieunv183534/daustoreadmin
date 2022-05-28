@@ -84,6 +84,17 @@
     margin-bottom: 12px;
 }
 
+.column{
+    display: flex;
+    flex-direction: column;
+    width: 97%;
+    height: auto;
+    align-items: center;
+    justify-content:space-between;
+    margin-bottom: 12px;
+    padding-left: 20px;
+}
+
 .form-item{
     height: auto;
     display: flex;

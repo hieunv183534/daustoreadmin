@@ -192,7 +192,7 @@
     float: left;
 }
 
-.function-bar{
+.function-bar {
     width: 100%;
     height: auto;
     background: #ddd;
@@ -204,7 +204,7 @@
     min-width: 52px;
 }
 
-.function-bar>span{
+.function-bar>span {
     width: auto;
     height: auto;
     display: flex;
@@ -213,21 +213,21 @@
     float: left;
 }
 
-.content-content{
+.content-content {
     width: 100%;
     float: left;
     height: calc(100% - 52px);
 }
 
-.function-bar span > *{
+.function-bar span>* {
     margin-right: 10px;
 }
 
-.function-bar span > *:last-child{
+.function-bar span>*:last-child {
     margin-right: 0;
 }
 
-.function-bar p,h1,h3,h4,h5,h6{
+.function-bar p, h1, h3, h4, h5, h6 {
     font-size: 14px;
     margin: 0;
     line-height: 36px;
@@ -269,7 +269,7 @@
     color: #eee;
 }
 
-.paging-bar{
+.paging-bar {
     width: 100%;
     height: 56px;
     float: left;
@@ -279,23 +279,23 @@
     background-color: #eee;
 }
 
-.paging-bar-left{
+.paging-bar-left {
     display: flex;
     align-items: center;
     justify-content: flex-start;
 }
 
-.paging-bar-right{
+.paging-bar-right {
     display: flex;
     align-items: center;
     justify-content: flex-end;
 }
 
-.paging-bar-right>*{
+.paging-bar-right>* {
     margin-left: 12px;
 }
 
-.paging-bar-right .next-page,.pre-page{
+.paging-bar-right .next-page, .pre-page {
     outline: 0;
     border: 0;
     background-color: #fff;
@@ -305,40 +305,40 @@
     border-radius: 4px;
 }
 
-.paging-bar-right .pre-page:hover{
+.paging-bar-right .pre-page:hover {
     background: #ccc;
 }
 
-.paging-bar-right .next-page:hover{
+.paging-bar-right .next-page:hover {
     background: #ccc;
 }
 
-.paging-bar-right .dropdown{
-    width: 100px !important ;
+.paging-bar-right .dropdown {
+    width: 100px !important;
 }
 
 
-.container{
+.container {
     width: 98%;
     height: 100%;
     margin-left: 50%;
-    transform: translate(-50%,0);
+    transform: translate(-50%, 0);
 }
 
-.grid{
+.grid {
     width: 100% !important;
     height: calc(100% - 56px) !important;
     border: 0 !important;
     float: left;
 }
 
-.content-content{
+.content-content {
     padding: 0px 16px !important;
 }
 
 /* form-data */
 
-.form-data{
+.form-data {
     z-index: 500;
     position: fixed;
     top: 0;
@@ -349,7 +349,7 @@
     display: none;
 }
 
-.form-category{
+.form-category {
     z-index: 500;
     position: fixed;
     top: 0;
@@ -360,11 +360,84 @@
     display: none;
 }
 
-.form-category .form{
+.form-category .form {
     width: 400px !important;
+    height: 790px !important;
 }
 
-.category-content{
+.form-category .form button {
+    margin-right: 0px !important;
+}
+
+.form-category .form .form-footer {
+    height: 420px !important;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 10px 0px;
+}
+
+.form-category .form .form-footer p {
+    margin: 0;
+}
+
+.form-category .form .form-footer .row {
+    padding: 0px 10px;
+    margin-bottom: 5px !important;
+}
+
+.list-category-description {
+    width: 100%;
+    height: 100%;
+    padding: 0px 50px;
+}
+
+.category-description-item {
+    height: 32px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    border-radius: 3px;
+}
+
+.category-description-item input{
+    outline: none;
+    border: 1px solid #888;
+    border-radius: 3px;
+    width: 240px;
+    padding: 0px 15px;
+}
+
+.add-new-item.category-description-item {
+    justify-content: center;
+}
+
+.my-list{
+    width: 100%;
+    height: auto;
+}
+
+.mybtn{
+    height: 100%;
+    width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #888;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.mybtn:hover{
+    background-color: #ccc;
+}
+
+
+
+.form-category .form .form-body {
+    height: calc(100% - 480px);
+}
+
+.category-content {
     position: absolute;
     top: 36px;
     left: 0px;
@@ -380,15 +453,15 @@
     display: none;
 }
 
-.category-bar{
+.category-bar {
     position: relative;
     width: 160px;
     height: 36px;
 }
 
-.category-main{
+.category-main {
     background-color: #fff;
-    border-radius: 4px; 
+    border-radius: 4px;
     width: 100%;
     height: 100%;
     border: 1px solid #ccc;
@@ -397,11 +470,11 @@
     cursor: pointer;
 }
 
-.category-bar:hover .category-content{
+.category-bar:hover .category-content {
     display: block;
 }
 
-.category-content:hover .category-content{
+.category-content:hover .category-content {
     display: block;
 }
 

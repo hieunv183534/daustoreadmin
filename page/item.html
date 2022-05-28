@@ -74,7 +74,7 @@
                         <div class="category-main">Tất cả sản phẩm</div>
                         <div class="category-content">
                             <nav class="tree-nav" id="category">
-                                
+
                             </nav>
                         </div>
                     </div>
@@ -189,10 +189,10 @@
                     <div class="form-item divide-3-row">
                         <div class="item-title">Danh mục: </div>
                         <div class="category-bar" id="valueCategoryCode">
-                            <div class="category-main">Tất cả sản phẩm</div>
+                            <div class="category-main">Vui lòng chọn danh mục</div>
                             <div class="category-content">
                                 <nav class="tree-nav" id="categoryx">
-                                    
+
                                 </nav>
                             </div>
                         </div>
@@ -200,11 +200,20 @@
                 </div>
                 <div class="row">
                     <div class="form-item divide-1-row">
-                        <div class="item-title">Chi tiết sản phẩm: </div>
-                        <div class="textarea-wrapper">
-                            <textarea id="valueDescription"></textarea>
+                        <div class="item-title">Chi tiết thông tin sản phẩm:
+                            <span style="font-size: 10px; font-weight: normal;">(Vui lòng chọn danh mục trước)</span>
                         </div>
                     </div>
+                </div>
+                <div class="column list-description-feature">
+                    <!-- <div class="form-item divide-1-row">
+                        <div>Chi tiết thông tin sản phẩm: </div>
+                        <input type="text" class="input" id="valueSalePrice">
+                    </div>
+                    <div class="form-item divide-1-row">
+                        <div>Chi tiết thông tin sản phẩm: </div>
+                        <input type="text" class="input" id="valueSalePrice">
+                    </div> -->
                 </div>
                 <div class="row">
                     <div class="form-item divide-1-row">
@@ -243,14 +252,36 @@
                 <div class="row">
                     <div class="form-item divide-1-row">
                         <nav class="tree-nav" id="category_form">
-                            
+
                         </nav>
                     </div>
                 </div>
             </div>
             <div class="form-footer">
-                <input type="text" class="input" style="margin-right: 40px;" id="valueCategoryName">
-                <button class="button button-primary" id="btnUpdateCategory">Thay đổi</button>
+                <div class="row">
+                    <p>Thuộc danh mục:</p>
+                    <input type="text" class="input" id="valueCategoryParent" disabled value="">
+                </div>
+                <div class="row">
+                    <p>Tên danh mục:</p>
+                    <input type="text" class="input" id="valueCategoryName">
+                </div>
+                <div class="row">
+                    <p>Các thông tin đi kèm:</p>
+                </div>
+                <div class="row" style="flex-grow: 1; overflow-y: auto;">
+                    <div class="list-category-description">
+                        <div class="my-list">
+
+                        </div>
+                        <div class="category-description-item add-new-item">
+                            <div class="mybtn add-description"><i class="fas fa-plus"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="justify-content: center;">
+                    <button class="button button-primary" id="btnUpdateCategory">Thay đổi</button>
+                </div>
             </div>
         </div>
     </div>
