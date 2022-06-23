@@ -290,4 +290,11 @@ class BaseApi {
             method: 'GET'
         })
     }
+
+    getUnit(unitCode){
+        return $.ajax({
+            url: `https://n8-covid-be.herokuapp.com/unit/unit-single?unit=${unitCode}`,
+            method: 'GET'
+        });
+    }
 }
