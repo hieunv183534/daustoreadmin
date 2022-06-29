@@ -139,32 +139,17 @@ class OrderPage extends Base {
     let unitArrs = unitCode.split("|");
     let tinh = `|${unitArrs[1]}|`;
     let huyen = `|${unitArrs[1]}|${unitArrs[2]}|`;
-    let xa = unitCode;
     let _tinh, _huyen, _xa;
-    await this.API.getUnit(tinh)
-      .done((res) => {
-        _tinh = res.data.unitName;
-      })
-      .fail((err) => {
-        console.log(err);
-      });
 
-    await this.API.getUnit(huyen)
-      .done((res) => {
-        _huyen = res.data.unitName;
-      })
-      .fail((err) => {
-        console.log(err);
-      });
-
-    await this.API.getUnit(xa)
-      .done((res) => {
-        _xa = res.data.unitName;
-      })
-      .fail((err) => {
-        console.log(err);
-      });
-
+    await Promise.all([
+      this.API.getUnit(tinh),
+      this.API.getUnit(huyen),
+      this.API.getUnit(unitCode),
+    ]).then((values) => {
+      _tinh = values[0].data.unitName;
+      _huyen = values[1].data.unitName;
+      _xa = values[2].data.unitName;
+    });
     return `, ${_xa}, ${_huyen}, ${_tinh}`;
   }
 
