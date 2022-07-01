@@ -291,6 +291,13 @@ class BaseApi {
         })
     }
 
+    getVoucherById(voucherId) {
+        return $.ajax({
+            url: this.baseUrl + `getVoucherById/${voucherId}`,
+            method: 'GET'
+        })
+    }
+
     getUnit(unitCode){
         return $.ajax({
             url: `https://n8-covid-be.herokuapp.com/unit/unit-single?unit=${unitCode}`,

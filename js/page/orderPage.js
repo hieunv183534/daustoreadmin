@@ -189,22 +189,27 @@ class OrderPage extends Base {
         listItemForm.append(
           parseHTML(`<div class="item-order">
                                             <img src="${getMediaUrl(
-                                              i.split("|")[3]
-                                            )}" alt="" style="width: 80px;">
-                                            <span> <b>X${i.split("|")[0]}</b> ${
-            i.split("|")[4]
-          }</span>
+            i.split("|")[3]
+          )}" alt="" style="width: 80px;">
+                                            <span> <b>X${i.split("|")[0]}</b> ${i.split("|")[4]
+            }</span>
                                         </div>`)
         );
       });
 
+      this.API.getVoucherById(order.voucherId).done(res => {
+        console.log(res);
+        document.querySelector('#valueVoucherCode').value = res.data.voucherCode;
+        document.querySelector('#valueVoucherDescription').value = res.data.description;
+      }).fail(err => {
+        console.log(err);
+      })
+
       formData.show();
       hidePopupDialog();
-      document.querySelector("#valueBuyerInfo").value = `- Tên: ${
-        order.buyerName
-      }\n- SDT: ${order.phone}\n- Địa chỉ: ${
-        order.address
-      }${await this.getUnitDetail(order.unitCode)}\n\n- Ghi chú: ${order.note}`;
+      document.querySelector("#valueBuyerInfo").value = `- Tên: ${order.buyerName
+        }\n- SDT: ${order.phone}\n- Địa chỉ: ${order.address
+        }${await this.getUnitDetail(order.unitCode)}\n\n- Ghi chú: ${order.note}`;
     });
     btns[2].addEventListener("click", () => {
       alert("Xóa mặt hàng");

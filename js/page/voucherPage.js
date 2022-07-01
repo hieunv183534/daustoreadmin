@@ -144,6 +144,12 @@ class VoucherPage extends Base {
             document.querySelector('#valueMaxNumber').value = !voucher.maxNumber ? '' : voucher.maxNumber;
             document.querySelector('#valueSaleNumber').value = !voucher.saleNumber ? '' : voucher.saleNumber;
 
+            debugger;
+            if (voucher.saleNumber) {
+                document.querySelectorAll('#voucherType .radio-button')[1].click();
+            } else {
+                document.querySelectorAll('#voucherType .radio-button')[0].click();
+            }
             formData.show();
             hidePopupDialog();
         });
