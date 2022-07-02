@@ -263,7 +263,7 @@ class ItemPage extends Base {
                     document.querySelector(".form-update-instock").setAttribute("show", "hide");
                     showToastMessenger('success', "Cập nhật số lượng sản phẩm thành công");
                 }).fail(err => {
-                    showToastMessenger('success', "Cập nhật số lượng sản phẩm thất bại");
+                    showToastMessenger('danger', "Cập nhật số lượng sản phẩm thất bại");
                 })
             } else {
                 showToastMessenger('success', "Không có gì thay đổi cả");
