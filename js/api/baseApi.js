@@ -79,7 +79,7 @@ class BaseApi {
             url: this.baseUrl + `updateCategory/${categoryId}`,
             method: 'PUT',
             headers: { "Authorization": this.accessToken },
-            data: JSON.stringify({categoryName: newName, categoryListDescription: listDescription}),
+            data: JSON.stringify({ categoryName: newName, categoryListDescription: listDescription }),
             dataType: 'json',
             contentType: 'application/json'
         })
@@ -129,6 +129,14 @@ class BaseApi {
             data: JSON.stringify(item),
             dataType: 'json',
             contentType: 'application/json'
+        })
+    }
+
+    changeItemInStock(itemId, changeNumber) {
+        return $.ajax({
+            url: this.baseUrl + `changeInStock/${itemId}/${changeNumber}`,
+            method: 'PUT',
+            headers: { "Authorization": this.accessToken },
         })
     }
 
@@ -298,7 +306,7 @@ class BaseApi {
         })
     }
 
-    getUnit(unitCode){
+    getUnit(unitCode) {
         return $.ajax({
             url: `https://n8-covid-be.herokuapp.com/unit/unit-single?unit=${unitCode}`,
             method: 'GET'

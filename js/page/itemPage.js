@@ -247,6 +247,8 @@ class ItemPage extends Base {
             .querySelector("#updateInStock")
             .addEventListener("click", () => {
                 document.querySelector(".form-update-instock").setAttribute("show", "show");
+                document.querySelector('#inputNewQuantity').value = document.querySelector('#inputOldQuantity').value;
+                document.querySelector('#inputChangeOfQuantity').value = 0;
             });
 
         document.querySelector('#closeFormUpdateInstock').addEventListener('click', () => {
@@ -254,7 +256,36 @@ class ItemPage extends Base {
         });
 
         document.querySelector('#btnUpdateInstock').addEventListener('click', () => {
-            alert("Xuất nhập hàng");
+            if (document.querySelector('#inputChangeOfQuantity').value != 0) {
+                let changeNumber = document.querySelector("#inputChangeOfQuantity").value;
+                let itemId = this.formItem.itemId;
+                this.API.changeItemInStock(itemId, changeNumber).done(res => {
+                    document.querySelector(".form-update-instock").setAttribute("show", "hide");
+                    showToastMessenger('success', "Cập nhật số lượng sản phẩm thành công");
+                }).fail(err => {
+                    showToastMessenger('success', "Cập nhật số lượng sản phẩm thất bại");
+                })
+            } else {
+                showToastMessenger('success', "Không có gì thay đổi cả");
+                document.querySelector(".form-update-instock").setAttribute("show", "hide");
+            }
+        });
+
+        document.querySelector('#inputChangeOfQuantity').addEventListener('change', (e) => {
+            let changeNumber = parseInt(e.target.value);
+            let minChange = parseInt(e.target.getAttribute('min'));
+            if (changeNumber < minChange) {
+                changeNumber = minChange;
+                e.target.value = minChange;
+            }
+            document.querySelector('#inputNewQuantity').value = Number(document.querySelector('#inputOldQuantity').value) + changeNumber;
+        });
+
+        document.querySelector('#inputNewQuantity').addEventListener('change', (e) => {
+            if (Number(e.target.value) < 0) {
+                e.target.value = 0;
+            }
+            document.querySelector('#inputChangeOfQuantity').value = Number(e.target.value) - Number(document.querySelector('#inputOldQuantity').value);
         });
     }
 
@@ -358,8 +389,6 @@ class ItemPage extends Base {
         });
         btns[1].addEventListener('click', () => {
             this.formItemMode = 'update';
-            console.log(JSON.stringify(item));
-
             // bind dữ liệu item lên form;
             this.newCode = item.itemCode;
             this.formItem.itemId = item.itemId;
@@ -370,6 +399,8 @@ class ItemPage extends Base {
             document.querySelector('#valueCategoryCode .category-main').innerHTML = item.categoryName;
             document.querySelector('#valueCategoryCode').setAttribute('value', item.categoryCode);
             document.querySelector('#valueSalePrice').value = parseInt(item.realPrice * (1 - item.saleRate * 0.01));
+            document.querySelector('#inputOldQuantity').value = item.inStock;
+            document.querySelector('#inputChangeOfQuantity').setAttribute('min', -item.inStock);
 
             let thisItemCategory = JSON.parse(localStorage.getItem('category')).find(cate => cate.categoryCode === item.categoryCode);
             this.loadListDescriptionFeatureForm(thisItemCategory.categoryListDescription, item.listDescription);
