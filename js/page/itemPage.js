@@ -105,7 +105,8 @@ class ItemPage extends Base {
             this.API.getNewItemCode().done(res => {
                 document.querySelector('#valueItemCode').value = res.data;
                 this.newCode = res.data;
-            })
+            });
+            $("#updateInStock").hide();
             formData.show();
             document.querySelector('#valueItemName').focus();
             this.formItemMode = 'add';
@@ -226,6 +227,35 @@ class ItemPage extends Base {
             newItem.querySelector('input').focus();
             this.initEventListDescription();
         });
+
+
+        document.querySelector('#valueRealPrice').addEventListener('change', (e) => {
+            let saleRate = document.querySelector('#valueSaleRate').value;
+            if (saleRate) {
+                document.querySelector('#valueSalePrice').value = parseInt(Number(e.target.value) * (1 - Number(saleRate) * 0.01));
+            }
+        });
+
+        document.querySelector('#valueSaleRate').addEventListener('change', (e) => {
+            let realPrice = document.querySelector('#valueRealPrice').value;
+            if (realPrice) {
+                document.querySelector('#valueSalePrice').value = parseInt(Number(realPrice) * (1 - Number(e.target.value) * 0.01));
+            }
+        });
+
+        document
+            .querySelector("#updateInStock")
+            .addEventListener("click", () => {
+                document.querySelector(".form-update-instock").setAttribute("show", "show");
+            });
+
+        document.querySelector('#closeFormUpdateInstock').addEventListener('click', () => {
+            document.querySelector(".form-update-instock").setAttribute("show", "hide");
+        });
+
+        document.querySelector('#btnUpdateInstock').addEventListener('click', () => {
+            alert("Xuất nhập hàng");
+        });
     }
 
     initEventMedia() {
@@ -339,6 +369,7 @@ class ItemPage extends Base {
             document.querySelector('#valueSaleRate').value = item.saleRate;
             document.querySelector('#valueCategoryCode .category-main').innerHTML = item.categoryName;
             document.querySelector('#valueCategoryCode').setAttribute('value', item.categoryCode);
+            document.querySelector('#valueSalePrice').value = parseInt(item.realPrice * (1 - item.saleRate * 0.01));
 
             let thisItemCategory = JSON.parse(localStorage.getItem('category')).find(cate => cate.categoryCode === item.categoryCode);
             this.loadListDescriptionFeatureForm(thisItemCategory.categoryListDescription, item.listDescription);
@@ -347,6 +378,7 @@ class ItemPage extends Base {
             this.loadListMedia(item.medias);
             document.querySelector('#valueTag').setAttribute('value', item.tag);
             this.setValueTag(item.tag);
+            $("#updateInStock").show();
             formData.show();
             hidePopupDialog();
         });

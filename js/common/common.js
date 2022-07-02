@@ -159,6 +159,8 @@ function loadTable(columns, datas, startIndex) {
                 value = `<b>${orderStatus[item.status]}</b>`;
             } else if (col.format == "paymentMethod") {
                 value = `<b>${paymentMethod[item.paymentMethod]}</b>`;
+            } else if(col.format == "salePrice"){
+                value = parseInt(item['realPrice']*(1-item['saleRate']*0.01)); 
             }
             else {
                 value = item[`${col.field}`];

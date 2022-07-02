@@ -206,14 +206,6 @@
                     </div>
                 </div>
                 <div class="column list-description-feature">
-                    <!-- <div class="form-item divide-1-row">
-                        <div>Chi tiết thông tin sản phẩm: </div>
-                        <input type="text" class="input" id="valueSalePrice">
-                    </div>
-                    <div class="form-item divide-1-row">
-                        <div>Chi tiết thông tin sản phẩm: </div>
-                        <input type="text" class="input" id="valueSalePrice">
-                    </div> -->
                 </div>
                 <div class="row">
                     <div class="form-item divide-1-row">
@@ -235,8 +227,33 @@
                 </div>
             </div>
             <div class="form-footer">
-                <button class="button button-secondary">Xuất nhập hàng</button>
+                <button class="button button-secondary" id="updateInStock">Xuất nhập hàng</button>
                 <button class="button button-primary" id="btnUpdateUserInfo">Cập nhật thông tin</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-update-instock"  show="hide">
+        <div class="loader-modal"></div>
+        <div class="box-quantity-content">
+            <div class="box-quantity-header"><h2 style="margin: 0px;">Xuất nhập hàng</h2></div>
+            <div class="box-quantity-body">
+                <div class="update-stock-item">
+                    <p>Số lượng ban đầu</p>
+                    <input type="number" class="input" disabled id="inputOldQuantity">
+                </div>
+                <div class="update-stock-item">
+                    <p>Số lượng thay đổi</p>
+                    <input type="number" class="input" id="inputChangeOfQuantity">
+                </div>
+                <div style="margin-bottom: 10px;" class="update-stock-item">
+                    <p>Số lượng sau thay đổi</p>
+                    <input type="number" class="input" id="inputNewQuantity">
+                </div>
+            </div>
+            <div class="box-quantity-footer">
+                <button class="button button-secondary" id="closeFormUpdateInstock">Hủy</button>
+                <button class="button button-primary" id="btnUpdateInstock">Xác nhận</button>
             </div>
         </div>
     </div>

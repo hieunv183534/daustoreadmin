@@ -27,6 +27,19 @@ class listColums {
             field: 'saleRate'
         },
         {
+            title: "Giá khuyến mãi",
+            width: "min-width: 200px;",
+            style: "text-align: center;",
+            field: 'salePrice',
+            format: 'salePrice'
+        },
+        {
+            title: "Số lượng trong kho",
+            width: "min-width: 200px;",
+            style: "text-align: center;",
+            field: 'inStock'
+        },
+        {
             title: "Danh mục",
             width: "min-width: 200px;",
             style: "text-align: center;",
