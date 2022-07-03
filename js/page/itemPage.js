@@ -56,6 +56,10 @@ class ItemPage extends Base {
         this.formItemMode = '';
         this.listCategory = [];
         this.newCode = '';
+        this.itemListDescription = {
+            listFeature: [],
+            listFeatureValue: []
+        }
         this.initEvent();
         this.loadListItem(null, null, 0, 10);
         this.renderTreeList();
@@ -405,6 +409,9 @@ class ItemPage extends Base {
 
             let thisItemCategory = JSON.parse(localStorage.getItem('category')).find(cate => cate.categoryCode === item.categoryCode);
             this.loadListDescriptionFeatureForm(thisItemCategory ? thisItemCategory.categoryListDescription : [], item.listDescription);
+            this.itemListDescription.listFeature = thisItemCategory.categoryListDescription;
+            this.itemListDescription.listFeatureValue = item.listDescription;
+            console.log(this.itemListDescription);
 
             document.querySelector('#valueMedias').setAttribute('value', item.medias);
             this.loadListMedia(item.medias);
@@ -482,6 +489,20 @@ class ItemPage extends Base {
                 document.querySelector('#valueCategoryCode .category-main').innerHTML = element.getAttribute('name');
                 let listFeature = element.getAttribute('categoryListDescription').split('XXX');
                 this.loadListDescriptionFeatureForm(listFeature, null);
+
+                // lọc và lấy những giá trị cũ đã có
+                listFeature.forEach((feature, index) => {
+                    for (let i = 0; i < this.itemListDescription.listFeature.length; i++) {
+                        let _feature = this.itemListDescription.listFeature[i];
+                        if (feature == _feature) {
+                            document.querySelectorAll('.list-description-feature input')[index].value =
+                                this.itemListDescription.listFeatureValue[i]
+                        } else {
+                            continue;
+                        }
+                    }
+                });
+
                 document.querySelectorAll('.form-data div.tree-nav__item-title').forEach(e => {
                     e.classList.remove('active');
                 })
