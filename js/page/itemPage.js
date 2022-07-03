@@ -388,6 +388,7 @@ class ItemPage extends Base {
             hidePopupDialog();
         });
         btns[1].addEventListener('click', () => {
+            console.log(item);
             this.formItemMode = 'update';
             // bind dữ liệu item lên form;
             this.newCode = item.itemCode;
@@ -403,7 +404,7 @@ class ItemPage extends Base {
             document.querySelector('#inputChangeOfQuantity').setAttribute('min', -item.inStock);
 
             let thisItemCategory = JSON.parse(localStorage.getItem('category')).find(cate => cate.categoryCode === item.categoryCode);
-            this.loadListDescriptionFeatureForm(thisItemCategory.categoryListDescription, item.listDescription);
+            this.loadListDescriptionFeatureForm(thisItemCategory ? thisItemCategory.categoryListDescription : [], item.listDescription);
 
             document.querySelector('#valueMedias').setAttribute('value', item.medias);
             this.loadListMedia(item.medias);
