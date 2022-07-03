@@ -11,7 +11,7 @@ class listColums {
         {
             title: "Tên sản phẩm",
             width: "min-width: 200px;",
-            style: "text-align: center;",
+            style: "text-align: left;",
             field: 'itemName'
         },
         {
@@ -64,7 +64,8 @@ class listColums {
             title : "Ngày đặt hàng",
             width : "min-width: 200px;",
             style : "text-align: center;",
-            field: 'createdAt'
+            field: 'createdAt',
+            format: 'datetime'
         },
         {
             title : "Sản phẩm",
@@ -116,7 +117,7 @@ class listColums {
             title : "Ghi chú",
             width : "min-width: 200px;",
             field: 'note',
-            style : "text-align: center;",
+            style : "text-align: left;",
         }
     ];
 

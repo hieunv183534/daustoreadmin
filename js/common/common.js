@@ -144,7 +144,9 @@ function loadTable(columns, datas, startIndex) {
                     `<i class="fas fa-times-circle" style="color:#EC5504;"></i>`
             } else if (col.format == 'date') {
                 value = formatDate(item[`${col.field}`]);
-            } else if (col.format == "listitem") {
+            } else if (col.format == 'datetime') {
+                value = formatDateTime(item[`${col.field}`]);
+            }else if (col.format == "listitem") {
                 let listItem = item[`${col.field}`].split(' _and_ ');
                 value = parseHTML('<div class="list-item-order"></div>');
                 listItem.forEach(i => {
@@ -427,6 +429,33 @@ function formatDate(_date) {
         month = (month < 10) ? '0' + month : month;
         var year = date.getFullYear();
         return day + '/' + month + '/' + year;
+    }
+    else {
+        return '';
+    }
+}
+
+/**------------------------------------------------------------------
+ * Hàm format ngày tháng
+ * dạng ngày/tháng/năm giờ:phút
+ * @param {any} _date
+ * Author: hieunv 
+ */
+ function formatDateTime(_date) {
+    if (_date != null) {
+        var date = new Date(_date);
+        var day = date.getDate();
+        day = (day < 10) ? '0' + day : day;
+        var month = date.getMonth() + 1;
+        month = (month < 10) ? '0' + month : month;
+        var year = date.getFullYear();
+
+        var hour =  date.getHours();
+        hour = (hour < 10) ? '0' + hour : hour;
+        var min =  date.getMinutes();
+        min = (min < 10) ? '0' + min : min;
+
+        return day + '/' + month + '/' + year + ` ${hour}:${min}`;
     }
     else {
         return '';

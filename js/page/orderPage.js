@@ -125,7 +125,7 @@ class OrderPage extends Base {
       this.count
     )
       .done((res) => {
-        loadTable(listColums.Orders, res.data.data, 1);
+        loadTable(listColums.Orders, res.data.data, this.index +1);
         this.initEventTable();
         this.total = res.data.total;
         this.reloadPagingInfo();
