@@ -112,6 +112,23 @@ class OrderPage extends Base {
           showToastMessenger("danger", "Cập nhật đơn hàng thất bại!");
         });
     });
+
+    document.querySelector('#btnExportOrderBill').addEventListener('click', () => {
+      console.log(this.orderId);
+      console.log(this.unitAddress);
+      this.API.exportBillDoc(this.orderId, this.unitAddress).done(res => {
+        console.log(res);
+        let url = res.replace("/app/wwwroot/","");
+        const a = document.createElement("a");
+        a.href = `https://daustore.herokuapp.com/${url}`;
+        // a.setAttribute("download", filename);
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      }).fail(err => {
+        showToastMessenger('danger', "Có lỗi, vui lòng thử lại!");
+      });
+    });
   }
 
   loadListOrder(myfilters) {
@@ -125,7 +142,7 @@ class OrderPage extends Base {
       this.count
     )
       .done((res) => {
-        loadTable(listColums.Orders, res.data.data, this.index +1);
+        loadTable(listColums.Orders, res.data.data, this.index + 1);
         this.initEventTable();
         this.total = res.data.total;
         this.reloadPagingInfo();
@@ -150,6 +167,7 @@ class OrderPage extends Base {
       _huyen = values[1].data.unitName;
       _xa = values[2].data.unitName;
     });
+    this.unitAddress = `${_xa}, ${_huyen}, ${_tinh}`
     return `, ${_xa}, ${_huyen}, ${_tinh}`;
   }
 
@@ -188,19 +206,16 @@ class OrderPage extends Base {
       listItem.forEach((i) => {
         listItemForm.append(
           parseHTML(`<div class="item-order">
-                                            <img src="${getMediaUrl(
-            i.split("|")[3]
-          )}" alt="" style="width: 80px;">
-                                            <span> <b>X${i.split("|")[0]}</b> ${i.split("|")[4]
-            }</span>
-                                        </div>`)
+                          <img src="${getMediaUrl(i.split("|")[3])}" alt="" style="width: 80px;">
+                          <span> <b>X${i.split("|")[0]}</b> ${i.split("|")[4]}</span>
+                      </div>`)
         );
       });
 
       this.API.getVoucherById(order.voucherId).done(res => {
         console.log(res);
-        document.querySelector('#valueVoucherCode').value = res.data.voucherCode;
-        document.querySelector('#valueVoucherDescription').value = res.data.description;
+        document.querySelector('#valueVoucherCode').value = res.code == 2004 ? "" : res.data.voucherCode;
+        document.querySelector('#valueVoucherDescription').value = res.code == 2004 ? "" : res.data.description;
       }).fail(err => {
         console.log(err);
       })

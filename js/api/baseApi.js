@@ -253,6 +253,14 @@ class BaseApi {
         })
     }
 
+    exportBillDoc(orderId, unitAddress){
+        return $.ajax({
+            url: this.baseUrl + `getOrderDocFile/${orderId}?unitAddress=${unitAddress}`,
+            method: 'GET',
+            headers: { "Authorization": this.accessToken }
+        })
+    }
+
     getVouchers(index = 0, count = 50, searchTerms = null, canuseState = 0) {
         let _searchTerms = (searchTerms == null) ? '' : `&searchTerms=${searchTerms}`;
         return $.ajax({

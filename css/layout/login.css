@@ -1,5 +1,5 @@
 .container {
-    max-width: 700px;
+    max-width: 430px;
     width: 100%;
     background: #fff;
     padding: 25px 30px;
@@ -25,7 +25,7 @@
 
 form .user-details .input-box {
     margin: 20px 0 12px 0;
-    width: calc(100% / 2 - 20px);
+    width: 100%;
 }
 
 .user-details .input-box input {
