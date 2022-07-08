@@ -253,7 +253,7 @@ class BaseApi {
         })
     }
 
-    exportBillDoc(orderId, unitAddress){
+    exportBillDoc(orderId, unitAddress) {
         return $.ajax({
             url: this.baseUrl + `getOrderDocFile/${orderId}?unitAddress=${unitAddress}`,
             method: 'GET',
@@ -318,6 +318,41 @@ class BaseApi {
         return $.ajax({
             url: `https://n8-covid-be.herokuapp.com/unit/unit-single?unit=${unitCode}`,
             method: 'GET'
+        });
+    }
+
+    getAccounts() {
+        return $.ajax({
+            url: this.baseUrl + `getAccounts`,
+            method: 'GET',
+            headers: { "Authorization": this.accessToken }
+        })
+    }
+
+    getAccounts() {
+        return $.ajax({
+            url: this.baseUrl + `getAccounts`,
+            method: 'GET',
+            headers: { "Authorization": this.accessToken }
+        })
+    }
+
+    addShopAccount(account) {
+        return $.ajax({
+            url: this.baseUrl + `addShopAccount`,
+            method: 'POST',
+            headers: { "Authorization": this.accessToken },
+            data: JSON.stringify(account),
+            dataType: 'json',
+            contentType: 'application/json'
+        })
+    }
+
+    deleteAccount(accountId) {
+        return $.ajax({
+            url: this.baseUrl + `deleteAccount/${accountId}`,
+            method: 'DELETE',
+            headers: { "Authorization": this.accessToken },
         });
     }
 }

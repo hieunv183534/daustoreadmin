@@ -139,13 +139,41 @@ class listColums {
             title : "Ngày hết hạn",
             width : "min-width: 200px;",
             style : "text-align: center;",
-            field: 'dateExpired'
+            field: 'dateExpired',
+            format: "datetime"
         },
         {
             title : "Số lượng",
             width : "min-width: 200px;",
             style : "text-align: center;",
             field: 'quota'
+        }
+    ];
+
+    static Accounts = [
+        {
+            title : "Tên tài khoản",
+            width : "min-width: 200px;",
+            style : "text-align: left;",
+            field: 'accountName'
+        },
+        {
+            title : "Số điện thoại",
+            width : "min-width: 200px;",
+            style : "text-align: center;",
+            field: 'phone'
+        },
+        {
+            title : "Email",
+            width : "min-width: 220px;",
+            style : "text-align: center;",
+            field: 'email'
+        },
+        {
+            title : "Vai trò",
+            width : "min-width: 200px;",
+            style : "text-align: center;",
+            field: 'role'
         }
     ];
 }
